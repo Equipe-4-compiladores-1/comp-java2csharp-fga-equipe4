@@ -1,0 +1,22 @@
+# Diretório de build do CMake
+build/
+bin/
+
+# Arquivos gerados pelo Flex e Bison
+grammar/*.yy.cpp
+grammar/*.yy.c
+grammar/*.tab.cpp
+grammar/*.tab.hpp
+grammar/*.tab.c
+grammar/*.tab.h
+grammar/*.output
+
+# Arquivos temporários e executáveis
+*.o
+*.out
+*.exe
+
+# Arquivos de IDEs
+.vscode/
+.idea/
+.DS_Store
