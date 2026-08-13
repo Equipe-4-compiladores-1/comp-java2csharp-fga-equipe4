@@ -1,13 +1,10 @@
-
-
-
 # Transpilador Java para C# (Subconjunto Procedural)
 
 Projeto desenvolvido para a disciplina de **Compiladores 1**. Trata-se de um transpilador da linguagem **Java** (focado no paradigma imperativo/procedural) para **C#**, utilizando **Flex**, **Bison** e **C++**.
 
 ---
 
-## 📐 Arquitetura da Solução
+## Arquitetura
 
 O fluxo de compilação/transpilação é estruturado em etapas desacopladas:
 
@@ -18,7 +15,7 @@ O fluxo de compilação/transpilação é estruturado em etapas desacopladas:
 
 ---
 
-## 📁 Estrutura do Repositório
+## Estrutura do Repositório
 
 ```text
 .
@@ -43,7 +40,7 @@ O fluxo de compilação/transpilação é estruturado em etapas desacopladas:
 
 ---
 
-## 🛠️ Pré-requisitos
+## Pré-requisitos
 
 Para compilar e executar o projeto, você precisará de:
 
@@ -54,7 +51,7 @@ Para compilar e executar o projeto, você precisará de:
 
 ---
 
-## 🚀 Como Compilar e Executar
+## Como Compilar e Executar
 
 1. **Criar diretório de build:**
 ```bash
