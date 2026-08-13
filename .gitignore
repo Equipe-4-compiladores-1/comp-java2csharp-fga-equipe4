@@ -20,3 +20,6 @@ grammar/*.output
 .vscode/
 .idea/
 .DS_Store
+
+# MkDocs
+site/
