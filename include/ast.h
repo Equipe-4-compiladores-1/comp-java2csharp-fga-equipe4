@@ -90,16 +90,27 @@ public:
     }
 };
 
+struct Param {
+    std::string type;
+    std::string name;
+    Param(const std::string& t, const std::string& n) : type(t), name(n) {}
+};
+
+
 // --- FUNÇÃO ---
 class FunctionDeclNode : public ASTNode {
 public:
     std::string returnType;
     std::string name;
+    std::vector<Param> params;
     std::vector<std::shared_ptr<StmtNode>> body;
 
-    FunctionDeclNode(std::string type, std::string name)
-        : returnType(std::move(type)), name(std::move(name)) {}
-    void accept(ASTVisitor* visitor) override { visitor->visit(this); }
+    FunctionDeclNode(const std::string& type, const std::string& id, std::vector<Param> p = {}) 
+        : returnType(type), name(id), params(p) {}
+
+    void accept(ASTVisitor* visitor) override {
+        visitor->visit(this);
+    }
 };
 
 

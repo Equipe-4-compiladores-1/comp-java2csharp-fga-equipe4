@@ -27,16 +27,6 @@ void CSharpCodegenVisitor::visit(ClassDeclNode* node) {
     std::cout << "    }\n";
 }
 
-void CSharpCodegenVisitor::visit(FunctionDeclNode* node) {
-    std::string returnType = (node->returnType == "boolean") ? "bool" : node->returnType;
-    std::string name = (node->name == "main") ? "Main" : node->name;
-
-    std::cout << "        public static " << returnType << " " << name << "() {\n";
-    for (const auto& stmt : node->body) {
-        stmt->accept(this);
-    }
-    std::cout << "        }\n\n";
-}
 
 void CSharpCodegenVisitor::visit(VarDeclNode* node) {
     std::string type = (node->type == "boolean") ? "bool" : node->type;
@@ -122,4 +112,33 @@ void CSharpCodegenVisitor::visit(PrintfStmtNode* node) {
     }
     
     std::cout << ");\n";
+}
+
+void CSharpCodegenVisitor::visit(FunctionDeclNode* node) {
+    // Escreve a assinatura com tipo e nome
+    std::cout << "        public static " << node->returnType << " " << node->name << "(";
+    
+    // Tratamento especial para o main
+    if (node->name == "main") {
+        std::cout << "string[] args";
+    } else {
+        // Imprime a lista de parâmetros dinâmica
+        for (size_t i = 0; i < node->params.size(); ++i) {
+            std::cout << node->params[i].type << " " << node->params[i].name;
+            if (i < node->params.size() - 1) {
+                std::cout << ", ";
+            }
+        }
+    }
+    
+    std::cout << ") {\n";
+
+    // Visita o corpo da função
+    for (auto stmt : node->body) {
+        if (stmt) {
+            stmt->accept(this);
+        }
+    }
+
+    std::cout << "        }\n\n";
 }

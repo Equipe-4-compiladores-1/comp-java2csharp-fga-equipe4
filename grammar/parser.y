@@ -16,6 +16,8 @@ std::shared_ptr<ClassDeclNode> rootNode;
     ASTNode* node;
     StmtNode* stmt;
     ExprNode* expr;
+    Param* param;
+    std::vector<Param>* param_list;
     std::vector<std::shared_ptr<StmtNode>>* stmt_list;
     std::vector<std::shared_ptr<ExprNode>>* expr_list;
 }
@@ -34,6 +36,8 @@ std::shared_ptr<ClassDeclNode> rootNode;
 %type <stmt_list> stmt_list
 %type <sval> type_specifier
 %type <expr_list> expr_list
+%type <param> param
+%type <param_list> param_list param_list_opt
 
 %left '+' '-'
 %left '*' '/'
@@ -60,17 +64,16 @@ type_specifier:
     ;
 
 function_decl:
-    type_specifier IDENTIFIER '(' ')' '{' stmt_list '}' {
-        auto func = std::make_shared<FunctionDeclNode>($1, $2);
-        func->body = *$6;
-        delete $6;
+    type_specifier IDENTIFIER '(' param_list_opt ')' '{' stmt_list '}' {
+        auto func = std::make_shared<FunctionDeclNode>($1, $2, *$4); // <-- Passando *$4
+        func->body = *$7;
+        delete $4;
+        delete $7;
         programFunctions.push_back(func);
     }
     | PUBLIC STATIC TYPE_VOID IDENTIFIER '(' TYPE_STRING '[' ']' IDENTIFIER ')' '{' stmt_list '}' {
-        /* $3 é o TYPE_VOID, $4 é o nome da função (main) */
+        /* Mantemos o main fixo para facilitar */
         auto func = std::make_shared<FunctionDeclNode>($<sval>3, $<sval>4);
-        
-        /* $12 é a stmt_list (o corpo do método) */
         func->body = *($<stmt_list>12);
         delete $<stmt_list>12;
         programFunctions.push_back(func);
@@ -115,6 +118,13 @@ stmt:
         // 4. Limpamos a lista temporária da memória
         delete $5;
     }
+
+    | PRINTF '(' STRING_LITERAL ')' ';' { 
+        // Versão do printf sem variáveis adicionais
+        std::vector<std::shared_ptr<ExprNode>> args;
+        args.push_back(std::make_shared<StringNode>($3));
+        $$ = new PrintfStmtNode(args); 
+    }
     ;
 
 var_decl:
@@ -147,6 +157,30 @@ expr_list:
     | expr_list ',' expr {
         $1->push_back(std::shared_ptr<ExprNode>($3));
         $$ = $1;
+    }
+    ;
+
+param_list_opt:
+    /* vazio */ { $$ = new std::vector<Param>(); }
+    | param_list { $$ = $1; }
+    ;
+
+param_list:
+    param { 
+        $$ = new std::vector<Param>(); 
+        $$->push_back(*$1); 
+        delete $1;
+    }
+    | param_list ',' param {
+        $1->push_back(*$3);
+        $$ = $1;
+        delete $3;
+    }
+    ;
+
+param:
+    type_specifier IDENTIFIER { 
+        $$ = new Param($1, $2); 
     }
     ;
 
