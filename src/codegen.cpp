@@ -1,16 +1,30 @@
 #include "codegen.h"
 
-void CSharpCodegenVisitor::generateProgram(const std::vector<std::shared_ptr<FunctionDeclNode>>& functions) {
+
+
+
+void CSharpCodegenVisitor::generateProgram(const std::shared_ptr<ClassDeclNode>& root) {
+    if (!root) return;
+
     std::cout << "using System;\n\n";
     std::cout << "namespace TranspiledProgram {\n";
-    std::cout << "    public static class Program {\n";
 
-    for (const auto& func : functions) {
+    // Chama o visitante para processar o nó da classe
+    root->accept(this);
+
+    std::cout << "}\n";
+}
+
+void CSharpCodegenVisitor::visit(ClassDeclNode* node) {
+    // Usa o nome dinâmico da classe que veio do código Java
+    std::cout << "    public static class " << node->className << " {\n";
+
+    // Visita cada função dentro da classe
+    for (const auto& func : node->functions) {
         func->accept(this);
     }
 
     std::cout << "    }\n";
-    std::cout << "}\n";
 }
 
 void CSharpCodegenVisitor::visit(FunctionDeclNode* node) {

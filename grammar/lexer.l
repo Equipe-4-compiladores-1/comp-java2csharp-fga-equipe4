@@ -10,6 +10,7 @@
 
 [ \t\r\n]+          ; // Ignora espaços em branco
 
+"class"             { return CLASS;}
 "int"               { yylval.sval = strdup(yytext); return TYPE_INT; }
 "boolean"           { yylval.sval = strdup(yytext); return TYPE_BOOL; }
 "void"              { yylval.sval = strdup(yytext); return TYPE_VOID; }

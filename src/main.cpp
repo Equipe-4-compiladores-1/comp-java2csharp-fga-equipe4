@@ -8,6 +8,7 @@
 extern FILE* yyin;
 extern int yyparse();
 extern std::vector<std::shared_ptr<FunctionDeclNode>> programFunctions;
+extern std::shared_ptr<ClassDeclNode> rootNode;
 
 int main(int argc, char** argv) {
     if (argc > 1) {
@@ -25,7 +26,7 @@ int main(int argc, char** argv) {
     if (yyparse() == 0) {
         // Gera o código C#
         CSharpCodegenVisitor codegen;
-        codegen.generateProgram(programFunctions);
+        codegen.generateProgram(rootNode);
     } else {
         std::cerr << "Falha na compilacao." << std::endl;
         return 1;

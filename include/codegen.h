@@ -9,8 +9,8 @@
 
 class CSharpCodegenVisitor : public ASTVisitor {
 public:
-    void generateProgram(const std::vector<std::shared_ptr<FunctionDeclNode>>& functions);
-
+    void generateProgram(const std::shared_ptr<ClassDeclNode>& root);
+    void visit(ClassDeclNode* node) override;
     void visit(BinaryExprNode* node) override;
     void visit(LiteralNode* node) override;
     void visit(VarDeclNode* node) override;

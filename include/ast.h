@@ -10,11 +10,13 @@ class LiteralNode;
 class VarDeclNode;
 class ReturnStmtNode;
 class FunctionDeclNode;
+class ClassDeclNode;
 
 // Padrão Visitor para percorrer a AST
 class ASTVisitor {
 public:
     virtual ~ASTVisitor() = default;
+    virtual void visit(ClassDeclNode* node) = 0;
     virtual void visit(BinaryExprNode* node) = 0;
     virtual void visit(LiteralNode* node) = 0;
     virtual void visit(VarDeclNode* node) = 0;
@@ -81,6 +83,22 @@ public:
     FunctionDeclNode(std::string type, std::string name)
         : returnType(std::move(type)), name(std::move(name)) {}
     void accept(ASTVisitor* visitor) override { visitor->visit(this); }
+};
+
+
+class ClassDeclNode : public ASTNode {
+public:
+    std::string className;
+    
+    std::vector<std::shared_ptr<FunctionDeclNode>> functions;
+
+    
+    ClassDeclNode(const std::string& name) : className(name) {}
+
+    void accept(ASTVisitor* visitor) override {
+        visitor->visit(this);
+    }
+    virtual ~ClassDeclNode() = default;
 };
 
 #endif

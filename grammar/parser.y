@@ -8,6 +8,7 @@ extern int yylex();
 void yyerror(const char* s);
 
 std::vector<std::shared_ptr<FunctionDeclNode>> programFunctions;
+std::shared_ptr<ClassDeclNode> rootNode;
 %}
 
 %union {
@@ -20,6 +21,7 @@ std::vector<std::shared_ptr<FunctionDeclNode>> programFunctions;
 
 %token <sval> IDENTIFIER TYPE_INT TYPE_BOOL TYPE_VOID INT_LITERAL
 %token RETURN
+%token CLASS
 
 %type <stmt> var_decl stmt
 %type <expr> expr
@@ -32,7 +34,7 @@ std::vector<std::shared_ptr<FunctionDeclNode>> programFunctions;
 %%
 
 program:
-    function_list
+    class_decl
     ;
 
 function_list:
@@ -52,6 +54,14 @@ function_decl:
         func->body = *$6;
         delete $6;
         programFunctions.push_back(func);
+    }
+    ;
+class_decl:
+    CLASS IDENTIFIER '{' function_list '}' {
+        auto classNode = std::make_shared<ClassDeclNode>($2);
+        classNode->functions = programFunctions;
+        programFunctions.clear();
+        rootNode = classNode;
     }
     ;
 
