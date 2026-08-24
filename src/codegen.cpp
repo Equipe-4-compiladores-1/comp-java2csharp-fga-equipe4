@@ -87,11 +87,38 @@ void CSharpCodegenVisitor::visit(StringNode* node) {
 
 void CSharpCodegenVisitor::visit(PrintfStmtNode* node) {
     std::cout << "            Console.Write(";
-    for (size_t i = 0; i < node->args.size(); ++i) {
-        node->args[i]->accept(this);
-        if (i < node->args.size() - 1) {
+    
+    if (!node->args.empty()) {
+        // Tenta converter o primeiro argumento para uma StringNode
+        auto formatNode = std::dynamic_pointer_cast<StringNode>(node->args[0]);
+        
+        if (formatNode) {
+            std::string fmt = formatNode->value;
+            size_t pos = 0;
+            int argIndex = 0;
+            
+            // Procura por %d na string e substitui por {0}, {1}, etc.
+            while ((pos = fmt.find("%d", pos)) != std::string::npos) {
+                std::string replacement = "{" + std::to_string(argIndex) + "}";
+                fmt.replace(pos, 2, replacement);
+                
+                // Avança a posição para não entrar em loop infinito
+                pos += replacement.length();
+                argIndex++;
+            }
+            // Imprime a string já formatada para C#
+            std::cout << fmt;
+        } else {
+            // Se por algum motivo não for string, apenas visita normalmente
+            node->args[0]->accept(this);
+        }
+        
+        // Imprime os argumentos restantes (as variáveis/contas)
+        for (size_t i = 1; i < node->args.size(); ++i) {
             std::cout << ", ";
+            node->args[i]->accept(this);
         }
     }
+    
     std::cout << ");\n";
 }

@@ -31,6 +31,7 @@ std::shared_ptr<ClassDeclNode> rootNode;
 %type <expr> expr
 %type <stmt_list> stmt_list
 %type <sval> type_specifier
+%type <expr_list> expr_list
 
 %left '+' '-'
 %left '*' '/'
@@ -91,18 +92,22 @@ stmt:
     | RETURN expr ';' { $$ = new ReturnStmtNode(std::shared_ptr<ExprNode>($2)); }
     | PRINT '(' expr ')' ';' { $$ = new PrintStmtNode(std::shared_ptr<ExprNode>($3), false); }
     | PRINTLN '(' expr ')' ';' { $$ = new PrintStmtNode(std::shared_ptr<ExprNode>($3), true); }
-    | PRINTF '(' STRING_LITERAL ',' expr ')' ';' { 
-        // 1. Criamos a lista que o nó espera
+    | PRINTF '(' STRING_LITERAL ',' expr_list ')' ';' { 
         std::vector<std::shared_ptr<ExprNode>> args;
         
-        // 2. Adicionamos a string (convertendo para StringNode)
+        // 1. Adicionamos a string (convertendo para StringNode)
         args.push_back(std::make_shared<StringNode>($3));
         
-        // 3. Adicionamos a variável/conta
-        args.push_back(std::shared_ptr<ExprNode>($5));
+        // 2. Lemos a lista ($5) e copiamos TODAS as variáveis para os argumentos
+        for (auto expr_ptr : *$5) {
+            args.push_back(expr_ptr);
+        }
         
-        // 4. Passamos a lista pronta para o PrintfStmtNode
+        // 3. Passamos a lista pronta para o PrintfStmtNode
         $$ = new PrintfStmtNode(args); 
+        
+        // 4. Limpamos a lista temporária da memória
+        delete $5;
     }
     ;
 
@@ -118,13 +123,23 @@ expr:
     INT_LITERAL { $$ = new LiteralNode($1); }
     | STRING_LITERAL { $$ = new StringNode($1); } // <-- Agora suporta Strings
     | IDENTIFIER { 
-        // <-- AGORA SUPORTA LER VARIÁVEIS NA MATEMÁTICA E NO PRINT!
         $$ = new LiteralNode($1); // (Reutilizando o LiteralNode para facilitar)
     }
     | expr '+' expr { $$ = new BinaryExprNode("+", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
     | expr '-' expr { $$ = new BinaryExprNode("-", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
     | expr '*' expr { $$ = new BinaryExprNode("*", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
     | expr '/' expr { $$ = new BinaryExprNode("/", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
+    ;
+
+expr_list:
+    expr { 
+        $$ = new std::vector<std::shared_ptr<ExprNode>>(); 
+        $$->push_back(std::shared_ptr<ExprNode>($1)); 
+    }
+    | expr_list ',' expr {
+        $1->push_back(std::shared_ptr<ExprNode>($3));
+        $$ = $1;
+    }
     ;
 
 %%

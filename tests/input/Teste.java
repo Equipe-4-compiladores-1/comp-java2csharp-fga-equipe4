@@ -9,6 +9,6 @@ class Teste {
         System.out.print("O valor de a eh: ");
         System.out.println(a);
         
-        System.out.printf("O resultado de a + b eh: %d\n", resultado);
+        System.out.printf("O resultado de %d + %d eh: %d\n", a, b, resultado);
     }
 }
