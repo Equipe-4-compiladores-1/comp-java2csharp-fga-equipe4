@@ -23,6 +23,7 @@ std::shared_ptr<ClassDeclNode> rootNode;
 %token RETURN
 %token CLASS
 %token PUBLIC STATIC TYPE_STRING
+%token PRINT PRINTLN
 
 %type <stmt> var_decl stmt
 %type <expr> expr
@@ -86,6 +87,8 @@ stmt_list:
 stmt:
     var_decl ';' { $$ = $1; }
     | RETURN expr ';' { $$ = new ReturnStmtNode(std::shared_ptr<ExprNode>($2)); }
+    | PRINT '(' expr ')' ';' { $$ = new PrintStmtNode(std::shared_ptr<ExprNode>($3), false); }
+    | PRINTLN '(' expr ')' ';' { $$ = new PrintStmtNode(std::shared_ptr<ExprNode>($3), true); }
     ;
 
 var_decl:

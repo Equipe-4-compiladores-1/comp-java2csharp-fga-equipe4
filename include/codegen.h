@@ -16,6 +16,7 @@ public:
     void visit(VarDeclNode* node) override;
     void visit(ReturnStmtNode* node) override;
     void visit(FunctionDeclNode* node) override;
+    void visit(PrintStmtNode* node) override;
 };
 
 #endif

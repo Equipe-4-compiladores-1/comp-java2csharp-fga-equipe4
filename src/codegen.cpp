@@ -66,3 +66,17 @@ void CSharpCodegenVisitor::visit(BinaryExprNode* node) {
 void CSharpCodegenVisitor::visit(LiteralNode* node) {
     std::cout << node->value;
 }
+void CSharpCodegenVisitor::visit(PrintStmtNode* node) {
+    if (node->isNewLine) {
+        std::cout << "            Console.WriteLine(";
+    } else {
+        std::cout << "            Console.Write(";
+    }
+    
+    // Visita a expressão que está dentro dos parênteses
+    if (node->expr) {
+        node->expr->accept(this);
+    }
+    
+    std::cout << ");\n";
+}

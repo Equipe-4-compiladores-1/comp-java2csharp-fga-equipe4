@@ -11,6 +11,7 @@ class VarDeclNode;
 class ReturnStmtNode;
 class FunctionDeclNode;
 class ClassDeclNode;
+class PrintStmtNode;
 
 // Padrão Visitor para percorrer a AST
 class ASTVisitor {
@@ -21,6 +22,7 @@ public:
     virtual void visit(LiteralNode* node) = 0;
     virtual void visit(VarDeclNode* node) = 0;
     virtual void visit(ReturnStmtNode* node) = 0;
+    virtual void visit(PrintStmtNode* node) = 0;
     virtual void visit(FunctionDeclNode* node) = 0;
 };
 
@@ -71,6 +73,18 @@ public:
     std::shared_ptr<ExprNode> expr;
     ReturnStmtNode(std::shared_ptr<ExprNode> e) : expr(std::move(e)) {}
     void accept(ASTVisitor* visitor) override { visitor->visit(this); }
+};
+
+class PrintStmtNode : public StmtNode {
+public:
+    std::shared_ptr<ExprNode> expr;
+    bool isNewLine; // true para println, false para print
+
+    PrintStmtNode(std::shared_ptr<ExprNode> e, bool nl) : expr(e), isNewLine(nl) {}
+
+    void accept(ASTVisitor* visitor) override {
+        visitor->visit(this);
+    }
 };
 
 // --- FUNÇÃO ---

@@ -18,6 +18,8 @@
 "public"            { return PUBLIC; }
 "static"            { return STATIC; }
 "String"            { return TYPE_STRING; }
+"System.out.println" { return PRINTLN; }
+"System.out.print"   { return PRINT; }
 
 [0-9]+              { yylval.sval = strdup(yytext); return INT_LITERAL; }
 [a-zA-Z_][a-zA-Z0-9_]* { yylval.sval = strdup(yytext); return IDENTIFIER; }
