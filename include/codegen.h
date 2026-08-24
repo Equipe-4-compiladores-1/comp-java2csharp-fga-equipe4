@@ -17,6 +17,8 @@ public:
     void visit(ReturnStmtNode* node) override;
     void visit(FunctionDeclNode* node) override;
     void visit(PrintStmtNode* node) override;
+    void visit(PrintfStmtNode* node) override;
+    void visit(StringNode* node) override;
 };
 
 #endif

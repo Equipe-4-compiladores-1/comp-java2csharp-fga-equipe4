@@ -12,7 +12,8 @@ class ReturnStmtNode;
 class FunctionDeclNode;
 class ClassDeclNode;
 class PrintStmtNode;
-
+class PrintfStmtNode;
+class StringNode;
 // Padrão Visitor para percorrer a AST
 class ASTVisitor {
 public:
@@ -24,6 +25,8 @@ public:
     virtual void visit(ReturnStmtNode* node) = 0;
     virtual void visit(PrintStmtNode* node) = 0;
     virtual void visit(FunctionDeclNode* node) = 0;
+    virtual void visit(PrintfStmtNode* node) = 0;
+    virtual void visit(StringNode* node) = 0;
 };
 
 // Classe Base
@@ -113,6 +116,22 @@ public:
         visitor->visit(this);
     }
     virtual ~ClassDeclNode() = default;
+};
+
+// Nó para textos ("exemplo")
+class StringNode : public ExprNode {
+public:
+    std::string value;
+    StringNode(const std::string& v) : value(v) {}
+    void accept(ASTVisitor* visitor) override { visitor->visit(this); }
+};
+
+// Nó para o printf
+class PrintfStmtNode : public StmtNode {
+public:
+    std::vector<std::shared_ptr<ExprNode>> args;
+    PrintfStmtNode(std::vector<std::shared_ptr<ExprNode>> a) : args(a) {}
+    void accept(ASTVisitor* visitor) override { visitor->visit(this); }
 };
 
 #endif

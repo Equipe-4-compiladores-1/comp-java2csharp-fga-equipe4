@@ -80,3 +80,18 @@ void CSharpCodegenVisitor::visit(PrintStmtNode* node) {
     
     std::cout << ");\n";
 }
+
+void CSharpCodegenVisitor::visit(StringNode* node) {
+    std::cout << node->value;
+}
+
+void CSharpCodegenVisitor::visit(PrintfStmtNode* node) {
+    std::cout << "            Console.Write(";
+    for (size_t i = 0; i < node->args.size(); ++i) {
+        node->args[i]->accept(this);
+        if (i < node->args.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << ");\n";
+}

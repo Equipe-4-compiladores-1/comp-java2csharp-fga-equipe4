@@ -1,8 +1,14 @@
 class Teste {
     public static void main(String[] args) {
-        int x = 10;
-        int y = 20;
-        System.out.print(20);
-        System.out.println(10);
+        int a = 10;
+        int b = 25;
+        int resultado = a + b;
+        
+        System.out.println("--- Teste do Transpilador ---");
+        
+        System.out.print("O valor de a eh: ");
+        System.out.println(a);
+        
+        System.out.printf("O resultado de a + b eh: %d\n", resultado);
     }
 }
