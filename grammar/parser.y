@@ -26,6 +26,8 @@ std::shared_ptr<ClassDeclNode> rootNode;
 %token PUBLIC STATIC TYPE_STRING
 %token PRINT PRINTLN PRINTF
 %token <sval> STRING_LITERAL
+%token <sval> TYPE_DOUBLE TYPE_FLOAT TYPE_CHAR TYPE_LONG
+%token <sval> FLOAT_LITERAL CHAR_LITERAL
 
 %type <stmt> var_decl stmt
 %type <expr> expr
@@ -51,6 +53,10 @@ type_specifier:
     TYPE_INT  { $$ = $1; }
     | TYPE_BOOL { $$ = $1; }
     | TYPE_VOID { $$ = $1; }
+    | TYPE_DOUBLE { $$ = $1; }
+    | TYPE_FLOAT  { $$ = $1; }
+    | TYPE_CHAR   { $$ = $1; }
+    | TYPE_LONG   { $$ = $1; }
     ;
 
 function_decl:
@@ -120,8 +126,10 @@ var_decl:
 
 
 expr:
-    INT_LITERAL { $$ = new LiteralNode($1); }
-    | STRING_LITERAL { $$ = new StringNode($1); } // <-- Agora suporta Strings
+      INT_LITERAL { $$ = new LiteralNode($1); }
+    | FLOAT_LITERAL   { $$ = new LiteralNode($1); } 
+    | CHAR_LITERAL    { $$ = new LiteralNode($1); }
+    | STRING_LITERAL { $$ = new StringNode($1); } 
     | IDENTIFIER { 
         $$ = new LiteralNode($1); // (Reutilizando o LiteralNode para facilitar)
     }

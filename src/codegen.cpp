@@ -89,7 +89,6 @@ void CSharpCodegenVisitor::visit(PrintfStmtNode* node) {
     std::cout << "            Console.Write(";
     
     if (!node->args.empty()) {
-        // Tenta converter o primeiro argumento para uma StringNode
         auto formatNode = std::dynamic_pointer_cast<StringNode>(node->args[0]);
         
         if (formatNode) {
@@ -97,23 +96,25 @@ void CSharpCodegenVisitor::visit(PrintfStmtNode* node) {
             size_t pos = 0;
             int argIndex = 0;
             
-            // Procura por %d na string e substitui por {0}, {1}, etc.
-            while ((pos = fmt.find("%d", pos)) != std::string::npos) {
-                std::string replacement = "{" + std::to_string(argIndex) + "}";
-                fmt.replace(pos, 2, replacement);
-                
-                // Avança a posição para não entrar em loop infinito
-                pos += replacement.length();
-                argIndex++;
+            // Procura por QUALQUER '%' na string
+            while ((pos = fmt.find("%", pos)) != std::string::npos) {
+                // Verifica se não é um "%%" (que serve para imprimir o próprio símbolo de porcentagem)
+                if (pos + 1 < fmt.length() && fmt[pos + 1] != '%') {
+                    std::string replacement = "{" + std::to_string(argIndex) + "}";
+                    // Substitui 2 caracteres (o % e a letra seguinte, como 'f' ou 'd')
+                    fmt.replace(pos, 2, replacement);
+                    
+                    pos += replacement.length();
+                    argIndex++;
+                } else {
+                    pos += 2; // Pula o "%%"
+                }
             }
-            // Imprime a string já formatada para C#
             std::cout << fmt;
         } else {
-            // Se por algum motivo não for string, apenas visita normalmente
             node->args[0]->accept(this);
         }
         
-        // Imprime os argumentos restantes (as variáveis/contas)
         for (size_t i = 1; i < node->args.size(); ++i) {
             std::cout << ", ";
             node->args[i]->accept(this);
