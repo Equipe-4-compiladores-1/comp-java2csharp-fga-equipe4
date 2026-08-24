@@ -22,6 +22,7 @@ std::shared_ptr<ClassDeclNode> rootNode;
 %token <sval> IDENTIFIER TYPE_INT TYPE_BOOL TYPE_VOID INT_LITERAL
 %token RETURN
 %token CLASS
+%token PUBLIC STATIC TYPE_STRING
 
 %type <stmt> var_decl stmt
 %type <expr> expr
@@ -53,6 +54,15 @@ function_decl:
         auto func = std::make_shared<FunctionDeclNode>($1, $2);
         func->body = *$6;
         delete $6;
+        programFunctions.push_back(func);
+    }
+    | PUBLIC STATIC TYPE_VOID IDENTIFIER '(' TYPE_STRING '[' ']' IDENTIFIER ')' '{' stmt_list '}' {
+        /* $3 é o TYPE_VOID, $4 é o nome da função (main) */
+        auto func = std::make_shared<FunctionDeclNode>($<sval>3, $<sval>4);
+        
+        /* $12 é a stmt_list (o corpo do método) */
+        func->body = *($<stmt_list>12);
+        delete $<stmt_list>12;
         programFunctions.push_back(func);
     }
     ;

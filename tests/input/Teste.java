@@ -3,7 +3,7 @@ class Teste {
         return 110 * 20;
     }
 
-    void main() {
+    public static void main(String[] args) {
         int x = 10;
     }
 }
