@@ -115,10 +115,13 @@ void CSharpCodegenVisitor::visit(PrintfStmtNode* node) {
 }
 
 void CSharpCodegenVisitor::visit(FunctionDeclNode* node) {
-    // Escreve a assinatura com tipo e nome
-    std::cout << "        public static " << node->returnType << " " << node->name << "(";
+    // Se o nome no Java for "main", mudamos para "Main" no C#. Senão, mantemos o original.
+    std::string methodName = (node->name == "main") ? "Main" : node->name;
+
+    // Escreve a assinatura usando a nossa nova variável 'methodName'
+    std::cout << "        public static " << node->returnType << " " << methodName << "(";
     
-    // Tratamento especial para o main
+    // Tratamento especial para os parâmetros do main
     if (node->name == "main") {
         std::cout << "string[] args";
     } else {

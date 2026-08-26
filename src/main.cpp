@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <cstdio>
 #include <memory>
 #include <vector>
@@ -31,6 +32,29 @@ int main(int argc, char** argv) {
         std::cerr << "Falha na compilacao." << std::endl;
         return 1;
     }
+
+
+    // 1. Cria e abre um arquivo chamado Program.cs
+    std::ofstream outFile("Saida.cs");
+    
+    // 2. Salva o destino original do cout (o terminal)
+    std::streambuf* oldCoutBuffer = std::cout.rdbuf();
+    
+    // 3. Redireciona tudo que for impresso no cout para o arquivo
+    std::cout.rdbuf(outFile.rdbuf());
+
+    // 4. Inicia a geração de código (ele acha que está imprimindo na tela, mas vai pro arquivo!)
+    CSharpCodegenVisitor codegen;
+    if (rootNode) {
+        rootNode->accept(&codegen);
+    }
+
+    // 5. Devolve o cout para o terminal e fecha o arquivo
+    std::cout.rdbuf(oldCoutBuffer);
+    outFile.close();
+
+    // 6. Imprime uma mensagem de sucesso no terminal real
+    std::cout << "Arquivo 'Saida.cs' gerado com sucesso.\n";
 
     return 0;
 }
