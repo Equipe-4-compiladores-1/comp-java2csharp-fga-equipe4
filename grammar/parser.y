@@ -43,6 +43,8 @@ std::shared_ptr<ClassDeclNode> rootNode;
 %left '+' '-'
 %left '*' '/'
 
+%start program
+
 %%
 
 program:
