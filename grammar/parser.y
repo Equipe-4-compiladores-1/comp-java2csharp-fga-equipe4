@@ -35,9 +35,10 @@ std::shared_ptr<ClassDeclNode> rootNode;
 %type <expr> expr
 %type <stmt_list> stmt_list
 %type <sval> type_specifier
-%type <expr_list> expr_list
+%type <expr_list> expr_list printf_args_opt
 %type <param> param
 %type <param_list> param_list param_list_opt
+
 
 %left '+' '-'
 %left '*' '/'
@@ -101,14 +102,14 @@ stmt:
     | RETURN expr ';' { $$ = new ReturnStmtNode(std::shared_ptr<ExprNode>($2)); }
     | PRINT '(' expr ')' ';' { $$ = new PrintStmtNode(std::shared_ptr<ExprNode>($3), false); }
     | PRINTLN '(' expr ')' ';' { $$ = new PrintStmtNode(std::shared_ptr<ExprNode>($3), true); }
-    | PRINTF '(' STRING_LITERAL ',' expr_list ')' ';' { 
+    | PRINTF '(' STRING_LITERAL  printf_args_opt ')' ';' { 
         std::vector<std::shared_ptr<ExprNode>> args;
         
         // 1. Adicionamos a string (convertendo para StringNode)
         args.push_back(std::make_shared<StringNode>($3));
         
         // 2. Lemos a lista ($5) e copiamos TODAS as variáveis para os argumentos
-        for (auto expr_ptr : *$5) {
+        for (auto expr_ptr : *$4) {
             args.push_back(expr_ptr);
         }
         
@@ -116,14 +117,7 @@ stmt:
         $$ = new PrintfStmtNode(args); 
         
         // 4. Limpamos a lista temporária da memória
-        delete $5;
-    }
-
-    | PRINTF '(' STRING_LITERAL ')' ';' { 
-        // Versão do printf sem variáveis adicionais
-        std::vector<std::shared_ptr<ExprNode>> args;
-        args.push_back(std::make_shared<StringNode>($3));
-        $$ = new PrintfStmtNode(args); 
+        delete $4;
     }
     ;
 
@@ -182,6 +176,10 @@ param:
     type_specifier IDENTIFIER { 
         $$ = new Param($1, $2); 
     }
+    ;
+printf_args_opt:
+    /* vazio */ { $$ = new std::vector<std::shared_ptr<ExprNode>>(); }
+    | ',' expr_list { $$ = $2; }
     ;
 
 %%

@@ -6,6 +6,6 @@ class Teste {
     public static void main(String[] args) {
         int x = 10;
         int y = 5;
-        System.out.printf("Ainda não aceita chamada de função\n");
+        System.out.printf("Ainda não aceita chamada de função %d\n", x+y);
     }
 }
