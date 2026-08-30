@@ -2,6 +2,7 @@
 #include <fstream>
 #include <cstdio>
 #include <memory>
+#include <sstream>
 #include <vector>
 #include "ast.h"
 #include "codegen.h"
@@ -25,36 +26,37 @@ int main(int argc, char** argv) {
 
     // Executa a Análise Sintática
     if (yyparse() == 0) {
-        // Gera o código C#
+        // 1. Redireciona o cout para um buffer de memória virtual
+        std::stringstream buffer;
+        std::streambuf* oldCoutBuffer = std::cout.rdbuf();
+        std::cout.rdbuf(buffer.rdbuf());
+
+        // 2. Inicia a geração de código
         CSharpCodegenVisitor codegen;
-        codegen.generateProgram(rootNode);
+        if (rootNode) {
+            codegen.generateProgram(rootNode); 
+        }
+
+        // 3. Restaura o cout IMEDIATAMENTE para o terminal real
+        std::cout.rdbuf(oldCoutBuffer);
+
+        // 4. Captura o código gerado em uma string
+        std::string codigoCsharp = buffer.str();
+
+        // 5. Grava fisicamente no arquivo
+        std::ofstream outFile("Saida.cs");
+        outFile << codigoCsharp;
+        outFile.close();
+
+        // 6. Imprime no terminal para a equipe visualizar
+        std::cout << "\n========== CODIGO GERADO ==========\n";
+        std::cout << codigoCsharp;
+        std::cout << "===================================\n";
+        std::cout << "Arquivo 'Saida.cs' gerado com sucesso.\n";
     } else {
         std::cerr << "Falha na compilacao." << std::endl;
         return 1;
     }
-
-
-    // 1. Cria e abre um arquivo chamado Program.cs
-    std::ofstream outFile("Saida.cs");
-    
-    // 2. Salva o destino original do cout (o terminal)
-    std::streambuf* oldCoutBuffer = std::cout.rdbuf();
-    
-    // 3. Redireciona tudo que for impresso no cout para o arquivo
-    std::cout.rdbuf(outFile.rdbuf());
-
-    // 4. Inicia a geração de código (ele acha que está imprimindo na tela, mas vai pro arquivo!)
-    CSharpCodegenVisitor codegen;
-    if (rootNode) {
-        rootNode->accept(&codegen);
-    }
-
-    // 5. Devolve o cout para o terminal e fecha o arquivo
-    std::cout.rdbuf(oldCoutBuffer);
-    outFile.close();
-
-    // 6. Imprime uma mensagem de sucesso no terminal real
-    std::cout << "Arquivo 'Saida.cs' gerado com sucesso.\n";
 
     return 0;
 }

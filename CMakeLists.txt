@@ -24,3 +24,21 @@ set(SOURCES
 )
 
 add_executable(java2csharp ${SOURCES})
+enable_testing()
+file(GLOB TEST_FILES "${CMAKE_CURRENT_SOURCE_DIR}/tests/input/*.java")
+foreach(INPUT_FILE IN LISTS TEST_FILES)
+get_filename_component(TEST_NAME ${INPUT_FILE} NAME_WE)
+add_test(
+        NAME "Compila_${TEST_NAME}"
+        COMMAND java2csharp ${INPUT_FILE}
+)
+add_test(
+        NAME "Valida_${TEST_NAME}"
+        COMMAND diff -u --strip-trailing-cr
+                Saida.cs 
+                ${CMAKE_CURRENT_SOURCE_DIR}/tests/expected/${TEST_NAME}_expected.cs
+)
+    
+    # Garante que a validação só ocorra se a compilação não der crash
+    set_tests_properties("Valida_${TEST_NAME}" PROPERTIES DEPENDS "Compila_${TEST_NAME}")
+endforeach()
