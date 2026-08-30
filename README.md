@@ -64,6 +64,11 @@ mkdir build && cd build
 cmake ..
 make
 ```
+## Como Rodar os Testes
+Para rodar os testes basta apenas rodar o seguinte comando na pasta build, após ter compilado e executado
+```
+make test
+```
 
 
 3. **Executar o transpilador:**
