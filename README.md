@@ -72,8 +72,28 @@ make
 ./java2csharp ../tests/input/exemplo.java -o saida.cs
 ```
 
-## Como Rodar os Testes
-Para rodar os testes basta apenas rodar o seguinte comando na pasta build, após ter compilado e executado
+## Como executar os testes
+Para executat os testes basta apenas rodar o seguinte comando na pasta build, após ter compilado e executado
 ```
 make test
+```
+## Como gerar Relatorio de Cobertura
+
+1. **Instalar o gcovr**
+```
+sudo apt update && sudo apt install gcovr
+```
+
+2. ** Executar um dos dois comandos para gerar o relatorio **
+
+Gerar no Terminal
+
+```
+make coverage
+```
+
+Gerar um HTML
+
+```
+make coverage_html
 ```
