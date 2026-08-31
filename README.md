@@ -97,3 +97,4 @@ Gerar um HTML
 ```
 make coverage_html
 ```
+O caminho do arquivo é build/coverage_report/index.html
