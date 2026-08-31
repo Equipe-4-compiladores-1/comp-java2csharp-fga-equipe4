@@ -66,7 +66,14 @@ make
 ```
 
 
+
 3. **Executar o transpilador:**
 ```bash
 ./java2csharp ../tests/input/exemplo.java -o saida.cs
+```
+
+## Como Rodar os Testes
+Para rodar os testes basta apenas rodar o seguinte comando na pasta build, após ter compilado e executado
+```
+make test
 ```
