@@ -24,6 +24,7 @@ set(SOURCES
 )
 
 add_executable(java2csharp ${SOURCES})
+# Configuração de testes
 enable_testing()
 file(GLOB TEST_FILES "${CMAKE_CURRENT_SOURCE_DIR}/tests/input/*.java")
 foreach(INPUT_FILE IN LISTS TEST_FILES)
@@ -42,3 +43,23 @@ add_test(
     # Garante que a validação só ocorra se a compilação não der crash
     set_tests_properties("Valida_${TEST_NAME}" PROPERTIES DEPENDS "Compila_${TEST_NAME}")
 endforeach()
+# Fim  da configuração de testes
+# Configuração do relatório de cobertura de teste
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -O0 -g")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
+# Gerar relatório de cobertura de teste no terminal
+add_custom_target(coverage
+    COMMAND mkdir -p coverage_report
+    COMMAND gcovr -r ${CMAKE_SOURCE_DIR} --filter "\".*/src/.*\"" --filter "\".*/include/.*\"" -e ".*/usr/.*"
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMENT "Gerando relatorio de cobertura resumido no terminal..."
+)
+
+# Gerar Html de cobertura de teste
+add_custom_target(coverage_html
+    COMMAND mkdir -p coverage_report
+    COMMAND gcovr -r ${CMAKE_SOURCE_DIR} --filter "\".*/src/.*\"" --filter "\".*/include/.*\"" -e ".*/usr/.*" --html --html-details -o coverage_report/index.html
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    COMMENT "Gerando relatorio de cobertura visual em HTML..."
+)
+# Fim da Configuração do relatório de cobertura de teste
