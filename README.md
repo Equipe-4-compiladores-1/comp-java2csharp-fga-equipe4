@@ -10,8 +10,9 @@ O fluxo de compilação/transpilação é estruturado em etapas desacopladas:
 
 1. **Análise Léxica (Flex):** Converte o código fonte `.java` em um fluxo de tokens.
 2. **Análise Sintática (Bison):** Valida a sintaxe e constrói a Árvore de Sintaxe Abstrata (AST).
-3. **Representação Intermediária (AST):** Estrutura hierárquica em C++ representando comandos, expressões e funções.
-4. **Geração de Código (C++ / Visitor):** Percorre a AST gerando o código em C# equivalente (envelopando funções em uma classe estática wrapper).
+3. **Análise Semântica (C++ / Visitor):** Valida a existência de variáveis, escopos aninhados, redefinições e conflitos de parâmetros utilizando uma Tabela de Símbolos.
+4. **Representação Intermediária (AST):** Estrutura hierárquica em C++ representando comandos, expressões e funções.
+5. **Geração de Código (C++ / Visitor):** Percorre a AST gerando o código em C# equivalente (envelopando funções em uma classe estática wrapper).
 
 ---
 
@@ -26,10 +27,12 @@ O fluxo de compilação/transpilação é estruturado em etapas desacopladas:
 ├── include/                  # Cabeçalhos C++ (.h / .hpp)
 │   ├── ast.h                 # Definição dos nós da AST
 │   ├── codegen.h             # Emissor de código C# (Visitor)
+│   ├── semantic_analyzer.h   # Analisador semântico da árvore
 │   └── symbol_table.h        # Tabela de símbolos e escopos
 ├── src/                      # Implementação dos módulos em C++
 │   ├── ast.cpp
 │   ├── codegen.cpp
+│   ├── semantic_analyzer.cpp
 │   ├── symbol_table.cpp
 │   └── main.cpp              # Ponto de entrada (CLI)
 └── tests/                    # Suíte de testes
@@ -54,47 +57,61 @@ Para compilar e executar o projeto, você precisará de:
 ## Como Compilar e Executar
 
 1. **Criar diretório de build:**
+
 ```bash
 mkdir build && cd build
+
 ```
 
-
 2. **Gerar os arquivos de compilação com CMake:**
+
 ```bash
 cmake ..
 make
+
 ```
-
-
 
 3. **Executar o transpilador:**
+
 ```bash
 ./java2csharp ../tests/input/exemplo.java -o saida.cs
+
 ```
+
+---
 
 ## Como executar os testes
-Para executat os testes basta apenas rodar o seguinte comando na pasta build, após ter compilado e executado
-```
+
+Para executar os testes, basta rodar o seguinte comando na pasta build, após ter compilado e executado:
+
+```bash
 make test
+
 ```
-## Como gerar Relatorio de Cobertura
+
+---
+
+## Como gerar Relatório de Cobertura
 
 1. **Instalar o gcovr**
-```
-sudo apt update && sudo apt install gcovr
-```
+* Arch Linux: `sudo pacman -S gcovr`
+* Debian/Ubuntu: `sudo apt update && sudo apt install gcovr`
 
-2. ** Executar um dos dois comandos para gerar o relatorio **
 
-Gerar no Terminal
+2. **Executar um dos dois comandos para gerar o relatório:**
 
-```
+Gerar no Terminal:
+
+```bash
 make coverage
 ```
 
-Gerar um HTML
+Gerar em HTML:
 
-```
+```bash
 make coverage_html
 ```
-O caminho do arquivo é build/coverage_report/index.html
+
+O caminho do arquivo será gerado em `build/coverage_report/index.html`.
+
+---

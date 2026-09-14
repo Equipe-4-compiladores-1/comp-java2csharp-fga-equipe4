@@ -19,6 +19,8 @@ ADD_FLEX_BISON_DEPENDENCY(Lexer Parser)
 set(SOURCES
         src/main.cpp
         src/codegen.cpp
+        src/symbol_table.cpp
+        src/semantic_analyzer.cpp
         ${BISON_Parser_OUTPUTS}
         ${FLEX_Lexer_OUTPUTS}
 )
