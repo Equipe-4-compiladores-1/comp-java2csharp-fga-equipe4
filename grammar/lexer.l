@@ -5,6 +5,7 @@
 %}
 
 %option noyywrap
+%option yylineno
 
 %%
 
@@ -46,6 +47,6 @@
 "["                 { return '['; }
 "]"                 { return ']'; }
 
-.                   { printf("Caractere desconhecido: %s\n", yytext); }
+.                   { return yytext[0]; }
 
 %%

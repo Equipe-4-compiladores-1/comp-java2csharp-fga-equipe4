@@ -1,0 +1,20 @@
+Compila_MainComMetodo_01 1 0.099903
+Valida_MainComMetodo_01 0 0
+Compila_MainVazia_01 1 0.074514
+Valida_MainVazia_01 1 0.00555647
+Compila_Semantico_01_Sucesso 1 0.0802272
+Valida_Semantico_01_Sucesso 1 0.007651
+Compila_Semantico_02_NaoDeclarada 0 0
+Valida_Semantico_02_NaoDeclarada 0 0
+Compila_Semantico_03_Redefinida 0 0
+Valida_Semantico_03_Redefinida 0 0
+Compila_Semantico_04_Parametro 0 0
+Valida_Semantico_04_Parametro 0 0
+---
+Valida_MainComMetodo_01
+Compila_Semantico_02_NaoDeclarada
+Valida_Semantico_02_NaoDeclarada
+Compila_Semantico_03_Redefinida
+Valida_Semantico_03_Redefinida
+Compila_Semantico_04_Parametro
+Valida_Semantico_04_Parametro

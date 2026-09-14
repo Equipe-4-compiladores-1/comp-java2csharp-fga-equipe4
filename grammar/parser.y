@@ -3,8 +3,11 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <cstring>
 
 extern int yylex();
+extern char* yytext;
+extern int yylineno;
 void yyerror(const char* s);
 
 std::vector<std::shared_ptr<FunctionDeclNode>> programFunctions;
@@ -42,6 +45,8 @@ std::shared_ptr<ClassDeclNode> rootNode;
 
 %left '+' '-'
 %left '*' '/'
+
+%define parse.error detailed
 
 %start program
 
@@ -211,6 +216,12 @@ printf_args_opt:
 %%
 
 void yyerror(const char* s) {
-    extern char* yytext;
-    std::cerr << "Erro sintatico proximo a '" << yytext <<  "': " << s << std::endl;
+    const char* termo = yytext;
+    if (termo == nullptr || *termo == '\0' || std::strstr(s, "end of file") != nullptr) {
+        termo = "fim do arquivo";
+    }
+
+    std::cerr << "Erro sintatico na linha " << yylineno
+              << ": termo '" << termo << "' nao pode ser compilado: "
+              << s << std::endl;
 }

@@ -1,0 +1,30 @@
+# CMake generated Testfile for 
+# Source directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4
+# Build directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+add_test(Compila_MainComMetodo_01 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/java2csharp" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/input/MainComMetodo_01.java")
+set_tests_properties(Compila_MainComMetodo_01 PROPERTIES  _BACKTRACE_TRIPLES "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;34;add_test;/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;0;")
+add_test(Valida_MainComMetodo_01 "diff" "-u" "--strip-trailing-cr" "Saida.cs" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/MainComMetodo_01_expected.cs")
+set_tests_properties(Valida_MainComMetodo_01 PROPERTIES  DEPENDS "Compila_MainComMetodo_01" _BACKTRACE_TRIPLES "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;38;add_test;/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;0;")
+add_test(Compila_MainVazia_01 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/java2csharp" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/input/MainVazia_01.java")
+set_tests_properties(Compila_MainVazia_01 PROPERTIES  _BACKTRACE_TRIPLES "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;34;add_test;/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;0;")
+add_test(Valida_MainVazia_01 "diff" "-u" "--strip-trailing-cr" "Saida.cs" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/MainVazia_01_expected.cs")
+set_tests_properties(Valida_MainVazia_01 PROPERTIES  DEPENDS "Compila_MainVazia_01" _BACKTRACE_TRIPLES "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;38;add_test;/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;0;")
+add_test(Compila_Semantico_01_Sucesso "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/java2csharp" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/input/Semantico_01_Sucesso.java")
+set_tests_properties(Compila_Semantico_01_Sucesso PROPERTIES  _BACKTRACE_TRIPLES "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;34;add_test;/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;0;")
+add_test(Valida_Semantico_01_Sucesso "diff" "-u" "--strip-trailing-cr" "Saida.cs" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/Semantico_01_Sucesso_expected.cs")
+set_tests_properties(Valida_Semantico_01_Sucesso PROPERTIES  DEPENDS "Compila_Semantico_01_Sucesso" _BACKTRACE_TRIPLES "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;38;add_test;/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;0;")
+add_test(Compila_Semantico_02_NaoDeclarada "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/java2csharp" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/input/Semantico_02_NaoDeclarada.java")
+set_tests_properties(Compila_Semantico_02_NaoDeclarada PROPERTIES  _BACKTRACE_TRIPLES "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;34;add_test;/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;0;")
+add_test(Valida_Semantico_02_NaoDeclarada "diff" "-u" "--strip-trailing-cr" "Saida.cs" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/Semantico_02_NaoDeclarada_expected.cs")
+set_tests_properties(Valida_Semantico_02_NaoDeclarada PROPERTIES  DEPENDS "Compila_Semantico_02_NaoDeclarada" _BACKTRACE_TRIPLES "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;38;add_test;/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;0;")
+add_test(Compila_Semantico_03_Redefinida "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/java2csharp" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/input/Semantico_03_Redefinida.java")
+set_tests_properties(Compila_Semantico_03_Redefinida PROPERTIES  _BACKTRACE_TRIPLES "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;34;add_test;/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;0;")
+add_test(Valida_Semantico_03_Redefinida "diff" "-u" "--strip-trailing-cr" "Saida.cs" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/Semantico_03_Redefinida_expected.cs")
+set_tests_properties(Valida_Semantico_03_Redefinida PROPERTIES  DEPENDS "Compila_Semantico_03_Redefinida" _BACKTRACE_TRIPLES "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;38;add_test;/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;0;")
+add_test(Compila_Semantico_04_Parametro "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/java2csharp" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/input/Semantico_04_Parametro.java")
+set_tests_properties(Compila_Semantico_04_Parametro PROPERTIES  _BACKTRACE_TRIPLES "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;34;add_test;/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;0;")
+add_test(Valida_Semantico_04_Parametro "diff" "-u" "--strip-trailing-cr" "Saida.cs" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/Semantico_04_Parametro_expected.cs")
+set_tests_properties(Valida_Semantico_04_Parametro PROPERTIES  DEPENDS "Compila_Semantico_04_Parametro" _BACKTRACE_TRIPLES "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;38;add_test;/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/CMakeLists.txt;0;")

@@ -1,0 +1,265 @@
+Start testing: Sep 13 23:11 -03
+----------------------------------------------------------
+1/12 Testing: Compila_MainComMetodo_01
+1/12 Test: Compila_MainComMetodo_01
+Command: "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/java2csharp" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/input/MainComMetodo_01.java"
+Directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl
+"Compila_MainComMetodo_01" start time: Sep 13 23:11 -03
+Output:
+----------------------------------------------------------
+
+========== CODIGO GERADO ==========
+using System;
+
+namespace TranspiledProgram {
+    public static class MainComMetodo_01 {
+        public static void Main(string[] args) {
+            Console.WriteLine("Iniciando programa...");
+            inicializar();
+            int x = (calcular(10, 20) + 5);
+        }
+
+        public static void inicializar() {
+            return ;
+        }
+
+        public static int calcular(int a, int b) {
+            return (a * b);
+        }
+
+    }
+}
+===================================
+Arquivo 'Saida.cs' gerado com sucesso.
+<end of output>
+Test time =   0.10 sec
+----------------------------------------------------------
+Test Passed.
+"Compila_MainComMetodo_01" end time: Sep 13 23:11 -03
+"Compila_MainComMetodo_01" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/12 Testing: Valida_MainComMetodo_01
+2/12 Test: Valida_MainComMetodo_01
+Command: "/usr/bin/diff" "-u" "--strip-trailing-cr" "Saida.cs" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/MainComMetodo_01_expected.cs"
+Directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl
+"Valida_MainComMetodo_01" start time: Sep 13 23:11 -03
+Output:
+----------------------------------------------------------
+--- Saida.cs	2026-09-13 23:11:34.855513000 -0300
++++ /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/MainComMetodo_01_expected.cs	2026-09-13 22:45:24.878631100 -0300
+@@ -17,4 +17,4 @@
+         }
+ 
+     }
+-}
++}
+\ No newline at end of file
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Failed.
+"Valida_MainComMetodo_01" end time: Sep 13 23:11 -03
+"Valida_MainComMetodo_01" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/12 Testing: Compila_MainVazia_01
+3/12 Test: Compila_MainVazia_01
+Command: "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/java2csharp" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/input/MainVazia_01.java"
+Directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl
+"Compila_MainVazia_01" start time: Sep 13 23:11 -03
+Output:
+----------------------------------------------------------
+
+========== CODIGO GERADO ==========
+using System;
+
+namespace TranspiledProgram {
+    public static class MainVazia_01 {
+        public static void Main(string[] args) {
+        }
+
+    }
+}
+===================================
+Arquivo 'Saida.cs' gerado com sucesso.
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Passed.
+"Compila_MainVazia_01" end time: Sep 13 23:11 -03
+"Compila_MainVazia_01" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/12 Testing: Valida_MainVazia_01
+4/12 Test: Valida_MainVazia_01
+Command: "/usr/bin/diff" "-u" "--strip-trailing-cr" "Saida.cs" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/MainVazia_01_expected.cs"
+Directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl
+"Valida_MainVazia_01" start time: Sep 13 23:11 -03
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Valida_MainVazia_01" end time: Sep 13 23:11 -03
+"Valida_MainVazia_01" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/12 Testing: Compila_Semantico_01_Sucesso
+5/12 Test: Compila_Semantico_01_Sucesso
+Command: "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/java2csharp" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/input/Semantico_01_Sucesso.java"
+Directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl
+"Compila_Semantico_01_Sucesso" start time: Sep 13 23:11 -03
+Output:
+----------------------------------------------------------
+
+========== CODIGO GERADO ==========
+using System;
+
+namespace TranspiledProgram {
+    public static class Principal {
+        public static void Main(string[] args) {
+            int a = 10;
+            int b = (a + 5);
+            Console.WriteLine(b);
+        }
+
+        public static int somar(int x, int y) {
+            int resultado = (x + y);
+            return resultado;
+        }
+
+    }
+}
+===================================
+Arquivo 'Saida.cs' gerado com sucesso.
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"Compila_Semantico_01_Sucesso" end time: Sep 13 23:11 -03
+"Compila_Semantico_01_Sucesso" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/12 Testing: Valida_Semantico_01_Sucesso
+6/12 Test: Valida_Semantico_01_Sucesso
+Command: "/usr/bin/diff" "-u" "--strip-trailing-cr" "Saida.cs" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/Semantico_01_Sucesso_expected.cs"
+Directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl
+"Valida_Semantico_01_Sucesso" start time: Sep 13 23:11 -03
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"Valida_Semantico_01_Sucesso" end time: Sep 13 23:11 -03
+"Valida_Semantico_01_Sucesso" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/12 Testing: Compila_Semantico_02_NaoDeclarada
+7/12 Test: Compila_Semantico_02_NaoDeclarada
+Command: "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/java2csharp" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/input/Semantico_02_NaoDeclarada.java"
+Directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl
+"Compila_Semantico_02_NaoDeclarada" start time: Sep 13 23:11 -03
+Output:
+----------------------------------------------------------
+Erro Semântico: Uso de variável não declarada 'b'.
+
+Compilação abortada devido a erros semânticos.
+
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Failed.
+"Compila_Semantico_02_NaoDeclarada" end time: Sep 13 23:11 -03
+"Compila_Semantico_02_NaoDeclarada" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/12 Testing: Valida_Semantico_02_NaoDeclarada
+8/12 Test: Valida_Semantico_02_NaoDeclarada
+Command: "/usr/bin/diff" "-u" "--strip-trailing-cr" "Saida.cs" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/Semantico_02_NaoDeclarada_expected.cs"
+Directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl
+"Valida_Semantico_02_NaoDeclarada" start time: Sep 13 23:11 -03
+Output:
+----------------------------------------------------------
+/usr/bin/diff: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/Semantico_02_NaoDeclarada_expected.cs: No such file or directory
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Failed.
+"Valida_Semantico_02_NaoDeclarada" end time: Sep 13 23:11 -03
+"Valida_Semantico_02_NaoDeclarada" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/12 Testing: Compila_Semantico_03_Redefinida
+9/12 Test: Compila_Semantico_03_Redefinida
+Command: "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/java2csharp" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/input/Semantico_03_Redefinida.java"
+Directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl
+"Compila_Semantico_03_Redefinida" start time: Sep 13 23:11 -03
+Output:
+----------------------------------------------------------
+Erro Semântico: Variável 'a' já foi declarada neste escopo.
+
+Compilação abortada devido a erros semânticos.
+
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Failed.
+"Compila_Semantico_03_Redefinida" end time: Sep 13 23:11 -03
+"Compila_Semantico_03_Redefinida" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/12 Testing: Valida_Semantico_03_Redefinida
+10/12 Test: Valida_Semantico_03_Redefinida
+Command: "/usr/bin/diff" "-u" "--strip-trailing-cr" "Saida.cs" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/Semantico_03_Redefinida_expected.cs"
+Directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl
+"Valida_Semantico_03_Redefinida" start time: Sep 13 23:11 -03
+Output:
+----------------------------------------------------------
+/usr/bin/diff: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/Semantico_03_Redefinida_expected.cs: No such file or directory
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Failed.
+"Valida_Semantico_03_Redefinida" end time: Sep 13 23:11 -03
+"Valida_Semantico_03_Redefinida" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/12 Testing: Compila_Semantico_04_Parametro
+11/12 Test: Compila_Semantico_04_Parametro
+Command: "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/java2csharp" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/input/Semantico_04_Parametro.java"
+Directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl
+"Compila_Semantico_04_Parametro" start time: Sep 13 23:11 -03
+Output:
+----------------------------------------------------------
+Erro Semântico: Variável 'taxa' já foi declarada neste escopo.
+
+Compilação abortada devido a erros semânticos.
+
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Failed.
+"Compila_Semantico_04_Parametro" end time: Sep 13 23:11 -03
+"Compila_Semantico_04_Parametro" time elapsed: 00:00:00
+----------------------------------------------------------
+
+12/12 Testing: Valida_Semantico_04_Parametro
+12/12 Test: Valida_Semantico_04_Parametro
+Command: "/usr/bin/diff" "-u" "--strip-trailing-cr" "Saida.cs" "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/Semantico_04_Parametro_expected.cs"
+Directory: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl
+"Valida_Semantico_04_Parametro" start time: Sep 13 23:11 -03
+Output:
+----------------------------------------------------------
+/usr/bin/diff: /mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/tests/expected/Semantico_04_Parametro_expected.cs: No such file or directory
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Failed.
+"Valida_Semantico_04_Parametro" end time: Sep 13 23:11 -03
+"Valida_Semantico_04_Parametro" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 13 23:11 -03
