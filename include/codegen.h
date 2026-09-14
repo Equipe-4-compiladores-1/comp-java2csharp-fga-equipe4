@@ -19,6 +19,8 @@ public:
     void visit(PrintStmtNode* node) override;
     void visit(PrintfStmtNode* node) override;
     void visit(StringNode* node) override;
+    void visit(MethodCallExprNode* node) override;
+    void visit(MethodCallStmtNode* node) override;
 };
 
 #endif
