@@ -1,0 +1,11 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "remoteAuthority": "wsl+Ubuntu",
+    "settings": {
+        "cmake.buildDirectory": "${workspaceFolder}/build-wsl"
+    }
+}
