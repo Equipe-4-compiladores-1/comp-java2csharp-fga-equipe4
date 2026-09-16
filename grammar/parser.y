@@ -3,8 +3,11 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <cstring>
 
 extern int yylex();
+extern char* yytext;
+extern int yylineno;
 void yyerror(const char* s);
 
 std::vector<std::shared_ptr<FunctionDeclNode>> programFunctions;
@@ -35,13 +38,15 @@ std::shared_ptr<ClassDeclNode> rootNode;
 %type <expr> expr
 %type <stmt_list> stmt_list
 %type <sval> type_specifier
-%type <expr_list> expr_list printf_args_opt
+%type <expr_list> expr_list printf_args_opt expr_list_opt
 %type <param> param
 %type <param_list> param_list param_list_opt
 
 
 %left '+' '-'
 %left '*' '/'
+
+%define parse.error detailed
 
 %start program
 
@@ -102,6 +107,7 @@ stmt_list:
 stmt:
     var_decl ';' { $$ = $1; }
     | RETURN expr ';' { $$ = new ReturnStmtNode(std::shared_ptr<ExprNode>($2)); }
+    | RETURN ';' { $$ = new ReturnStmtNode(nullptr); }
     | PRINT '(' expr ')' ';' { $$ = new PrintStmtNode(std::shared_ptr<ExprNode>($3), false); }
     | PRINTLN '(' expr ')' ';' { $$ = new PrintStmtNode(std::shared_ptr<ExprNode>($3), true); }
     | PRINTF '(' STRING_LITERAL  printf_args_opt ')' ';' { 
@@ -121,6 +127,15 @@ stmt:
         // 4. Limpamos a lista temporária da memória
         delete $4;
     }
+    | IDENTIFIER '(' expr_list_opt ')' ';' {
+        $$ = new MethodCallStmtNode($1, *$3);
+        delete $3;
+    }
+    | IDENTIFIER '.' IDENTIFIER '(' expr_list_opt ')' ';' { 
+        std::string qualifiedName = std::string($1) + "." + std::string($3);
+        $$ = new MethodCallStmtNode(qualifiedName, *$5);
+        delete $5;
+    }
     ;
 
 var_decl:
@@ -139,6 +154,15 @@ expr:
     | IDENTIFIER { 
         $$ = new LiteralNode($1); // (Reutilizando o LiteralNode para facilitar)
     }
+    | IDENTIFIER '(' expr_list_opt ')' {
+        $$ = new MethodCallExprNode($1, *$3);
+        delete $3;
+    }
+    | IDENTIFIER '.' IDENTIFIER '(' expr_list_opt ')' {
+        std::string qualifiedName = std::string($1) + "." + std::string($3);
+        $$ = new MethodCallExprNode(qualifiedName, *$5);
+        delete $5;
+    }
     | expr '+' expr { $$ = new BinaryExprNode("+", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
     | expr '-' expr { $$ = new BinaryExprNode("-", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
     | expr '*' expr { $$ = new BinaryExprNode("*", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
@@ -154,6 +178,11 @@ expr_list:
         $1->push_back(std::shared_ptr<ExprNode>($3));
         $$ = $1;
     }
+    ;
+
+expr_list_opt:
+    /* vazio */ { $$ = new std::vector<std::shared_ptr<ExprNode>>(); }
+    | expr_list { $$ = $1; }
     ;
 
 param_list_opt:
@@ -187,5 +216,12 @@ printf_args_opt:
 %%
 
 void yyerror(const char* s) {
-    std::cerr << "Erro sintatico: " << s << std::endl;
+    const char* termo = yytext;
+    if (termo == nullptr || *termo == '\0' || std::strstr(s, "end of file") != nullptr) {
+        termo = "fim do arquivo";
+    }
+
+    std::cerr << "[Erro Sintatico] na linha " << yylineno
+              << ": termo '" << termo << "' nao pode ser compilado: "
+              << s << std::endl;
 }

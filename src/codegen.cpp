@@ -1,8 +1,5 @@
 #include "codegen.h"
 
-
-
-
 void CSharpCodegenVisitor::generateProgram(const std::shared_ptr<ClassDeclNode>& root) {
     if (!root) return;
 
@@ -12,7 +9,7 @@ void CSharpCodegenVisitor::generateProgram(const std::shared_ptr<ClassDeclNode>&
     // Chama o visitante para processar o nó da classe
     root->accept(this);
 
-    std::cout << "}\n";
+    std::cout << "}";
 }
 
 void CSharpCodegenVisitor::visit(ClassDeclNode* node) {
@@ -144,4 +141,39 @@ void CSharpCodegenVisitor::visit(FunctionDeclNode* node) {
     }
 
     std::cout << "        }\n\n";
+}
+
+void CSharpCodegenVisitor::visit(MethodCallExprNode* node) {
+    // Atribui o nome do metodo e abre parênteses
+    std::cout << node->methodName << "(";   
+
+    // Itera sobre os args, visitando cada expr para gerar o codigo
+    for (size_t i = 0; i < node->args.size(); ++i) {
+        node->args[i]->accept(this);
+        if (i < node->args.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+
+    // Fecha parênteses (sem ponto e virgula, pois é uma expr)
+    std::cout << ")";
+}
+
+void CSharpCodegenVisitor::visit(MethodCallStmtNode* node) {
+    std::cout << "            ";
+
+    std::string name = node->methodName;
+    if (name == "System.out.println") name = "Console.WriteLine";
+    else if (name == "System.out.print") name = "Console.Write";
+
+    std::cout << name << "(";
+
+    for (size_t i = 0; i < node->args.size(); ++i) {
+        node->args[i]->accept(this);
+        if (i < node->args.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+
+    std::cout << ");\n";
 }

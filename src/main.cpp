@@ -6,6 +6,7 @@
 #include <vector>
 #include "ast.h"
 #include "codegen.h"
+#include "semantic_analyzer.h"
 
 extern FILE* yyin;
 extern int yyparse();
@@ -26,29 +27,36 @@ int main(int argc, char** argv) {
 
     // Executa a Análise Sintática
     if (yyparse() == 0) {
-        // 1. Redireciona o cout para um buffer de memória virtual
+
+        SemanticAnalyzerVisitor semantic_analyzer;
+        if (!semantic_analyzer.analyze(rootNode)) {
+            std::cerr << "\nCompilação abortada devido a erros semânticos.\n" << std::endl;
+            return 1;
+        }
+
+        // Redireciona o cout para um buffer de memória virtual
         std::stringstream buffer;
         std::streambuf* oldCoutBuffer = std::cout.rdbuf();
         std::cout.rdbuf(buffer.rdbuf());
 
-        // 2. Inicia a geração de código
+        // Inicia a geração de código
         CSharpCodegenVisitor codegen;
         if (rootNode) {
             codegen.generateProgram(rootNode); 
         }
 
-        // 3. Restaura o cout IMEDIATAMENTE para o terminal real
+        // Restaura o cout IMEDIATAMENTE para o terminal real
         std::cout.rdbuf(oldCoutBuffer);
 
-        // 4. Captura o código gerado em uma string
+        // Captura o código gerado em uma string
         std::string codigoCsharp = buffer.str();
 
-        // 5. Grava fisicamente no arquivo
+        // Grava fisicamente no arquivo
         std::ofstream outFile("Saida.cs");
         outFile << codigoCsharp;
         outFile.close();
 
-        // 6. Imprime no terminal para a equipe visualizar
+        // Imprime no terminal para a equipe visualizar
         std::cout << "\n========== CODIGO GERADO ==========\n";
         std::cout << codigoCsharp;
         std::cout << "===================================\n";

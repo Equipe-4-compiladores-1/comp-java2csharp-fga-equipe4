@@ -14,6 +14,9 @@ class ClassDeclNode;
 class PrintStmtNode;
 class PrintfStmtNode;
 class StringNode;
+class MethodCallExprNode;
+class MethodCallStmtNode;
+
 // Padrão Visitor para percorrer a AST
 class ASTVisitor {
 public:
@@ -27,6 +30,8 @@ public:
     virtual void visit(FunctionDeclNode* node) = 0;
     virtual void visit(PrintfStmtNode* node) = 0;
     virtual void visit(StringNode* node) = 0;
+    virtual void visit(MethodCallExprNode* node) = 0;
+    virtual void visit(MethodCallStmtNode* node) = 0;
 };
 
 // Classe Base
@@ -143,6 +148,32 @@ public:
     std::vector<std::shared_ptr<ExprNode>> args;
     PrintfStmtNode(std::vector<std::shared_ptr<ExprNode>> a) : args(a) {}
     void accept(ASTVisitor* visitor) override { visitor->visit(this); }
+};
+
+class MethodCallExprNode : public ExprNode {
+public: 
+    std::string methodName;
+    std::vector<std::shared_ptr<ExprNode>> args;
+
+    MethodCallExprNode(std::string name, std::vector<std::shared_ptr<ExprNode>> a)
+        : methodName(std::move(name)), args(std::move(a)) {}
+
+    void accept(ASTVisitor* visitor) override {
+        visitor->visit(this);
+    }
+};
+
+class MethodCallStmtNode : public StmtNode {
+public:
+    std::string methodName;
+    std::vector<std::shared_ptr<ExprNode>> args;
+
+    MethodCallStmtNode(std::string name, std::vector<std::shared_ptr<ExprNode>> a)
+        : methodName(std::move(name)), args(std::move(a)) {}
+
+    void accept(ASTVisitor* visitor) override {
+        visitor->visit(this);
+    }
 };
 
 #endif

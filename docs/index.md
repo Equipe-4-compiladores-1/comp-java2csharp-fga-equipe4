@@ -46,13 +46,15 @@ Veja abaixo a conversão que o compilador realiza:
 
 === "Java (Entrada)"
 ```java
-int somar(int a, int b) {
-return a + b;
-}
-
-    void main() {
+class Program {
+    public static void main(String[] args) {
         int resultado = somar(10, 20);
     }
+    
+    int somar(int a, int b) {
+        return a + b;
+    }      
+}
 ```
 === "C# (Saída Gerada)"
 
@@ -61,12 +63,12 @@ using System;
 
     namespace TranspiledProgram {
         public static class Program {
-            public static int somar(int a, int b) {
-                return (a + b);
-            }
-
             public static void Main() {
                 int resultado = somar(10, 20);
+            }
+
+            public static int somar(int a, int b) {
+                return (a + b);
             }
         }
     }
@@ -78,3 +80,5 @@ using System;
 
 ??? tip "Como testar localmente?"
 Consulte nosso **[Guia de Compilação](guia-de-uso.md)** para aprender a compilar o projeto com o CMake e rodar os testes automatizados.
+
+---
