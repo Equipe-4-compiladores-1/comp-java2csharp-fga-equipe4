@@ -9,7 +9,7 @@ void CSharpCodegenVisitor::generateProgram(const std::shared_ptr<ClassDeclNode>&
     // Chama o visitante para processar o nó da classe
     root->accept(this);
 
-    std::cout << "}\n";
+    std::cout << "}";
 }
 
 void CSharpCodegenVisitor::visit(ClassDeclNode* node) {

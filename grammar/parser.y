@@ -221,7 +221,7 @@ void yyerror(const char* s) {
         termo = "fim do arquivo";
     }
 
-    std::cerr << "Erro sintatico na linha " << yylineno
+    std::cerr << "[Erro Sintatico] na linha " << yylineno
               << ": termo '" << termo << "' nao pode ser compilado: "
               << s << std::endl;
 }
