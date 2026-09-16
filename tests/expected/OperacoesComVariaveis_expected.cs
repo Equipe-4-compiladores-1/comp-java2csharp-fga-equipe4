@@ -3,31 +3,18 @@ using System;
 namespace TranspiledProgram {
     public static class OperacoesComVariaveis {
         public static void Main(string[] args) {
-
-            short s = 0;
-            s = (short)(s + 1);
-
-            byte b = 0;
-            b = (byte)(b + 1);
-
             int i = 0;
-            i = i + 1;
-
+            int x = 1;
+            int z = (x + i);
             long l = 0;
-            l = l + 1;
-
-            float f = 0.0f;
-            f = f + 1.0f;
-
+            long m = 1;
+            long n = (m + l);
+            float f = 0.0;
+            float g = 1.0;
+            float h = (g + f);
             double d = 0.0;
-            d = d + 1.0;
-
-            char c = '\0';
-            c = (char)(c + 1);
-
-            bool boolean = false;
-            boolean = !boolean;
-
+            double e = 1.0;
+            double j = (e + d);
         }
 
     }
