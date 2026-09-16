@@ -1,0 +1,96 @@
+name: Pipeline de Integração Contínua - Java2Csharp
+
+on:
+  push:
+    branches: [ "main" ] 
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: --- Build ---
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v4
+
+    - name: Instalar Dependências (CMake, Flex, Bison, GCC)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake flex bison build-essential
+      
+    - name: Configurar o CMake
+      run: |
+        mkdir build && cd build
+        cmake ..
+
+    - name: Compilar Java2Csharp
+      run: |
+        cd build
+        make
+
+    - name: Salvar artefatos de build
+      uses: actions/upload-artifacts@v4
+      with:
+        name: build-artifacts
+        path: build/
+        include-hidden-files: true
+
+  test:
+    name: --- Test ---
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v4
+
+    - name: Instalar Dependências (CMake, Flex, Bison, GCC)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake flex bison build-essential
+    
+    - name: Baixar artefatos compilados
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifact
+        path: build/
+    
+    - name: Executar Suíte de Testes
+      run: |
+        cd build
+        make test
+
+    - name: Salvar dados de execução dos testes (.gcda)
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-artifact
+        path: build/
+        include-hidden-files: true
+
+  coverage:
+    name: --- Coverage ---
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v4
+
+    - name: Instalar Gcovr e CMake
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake gcovr
+    
+    - name: Baixar artefatos dos testes executados
+      uses: actions/download-artifact@v4
+      with:
+        name: test-artifact
+        path: build/
+
+    - name: Gerar Relatório de Cobertura (HTML)
+      run: |
+        cd build
+        make coverage_html
+
+    - name: Disponibilizar HTML de Cobertura
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: build/coverage_report/
