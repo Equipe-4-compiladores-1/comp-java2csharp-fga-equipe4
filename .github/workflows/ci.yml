@@ -3,7 +3,7 @@ name: Pipeline de Integração Contínua - Java2Csharp
 on:
   push:
     branches: [ "main" ] 
-  pull:
+  pull_request:
     branches: [ "main" ]
 
 jobs:
