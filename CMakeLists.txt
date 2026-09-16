@@ -38,7 +38,7 @@ foreach(INPUT_FILE IN LISTS SUCCESS_FILES)
 endforeach()
 
 # 2. Falha: Léxico
-file(GLOB FAILURE_LEXICAL "${CMAKE_CURRENT_SOURCE_DIR}/tests/input/failure/lexer/*.java")
+file(GLOB FAILURE_LEXICAL "${CMAKE_CURRENT_SOURCE_DIR}/tests/input/failure/lexical/*.java")
 foreach(INPUT_FILE IN LISTS FAILURE_LEXICAL)
     get_filename_component(TEST_NAME ${INPUT_FILE} NAME_WE)
     add_test(NAME "Falha_Lexico_${TEST_NAME}" COMMAND java2csharp ${INPUT_FILE})
