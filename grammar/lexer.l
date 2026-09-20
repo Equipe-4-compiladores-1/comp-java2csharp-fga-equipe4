@@ -27,11 +27,11 @@
 "System.out.print"   { return PRINT; }
 "System.out.printf" { return PRINTF; }
 ","                 { return ','; }
-\"[^"]*\"           { yylval.sval = strdup(yytext); return STRING_LITERAL; }
 
-[0-9]+              { yylval.sval = strdup(yytext); return INT_LITERAL; }
-[0-9]+\.[0-9]+      { yylval.sval = strdup(yytext); return FLOAT_LITERAL; } 
-\'[^']\'            { yylval.sval = strdup(yytext); return CHAR_LITERAL; }  
+\"[^"]*\"              { yylval.sval = strdup(yytext); return STRING_LITERAL; }
+[0-9]+                 { yylval.sval = strdup(yytext); return INT_LITERAL; }
+[0-9]+\.[0-9]+         { yylval.sval = strdup(yytext); return FLOAT_LITERAL; } 
+\'[^']\'               { yylval.sval = strdup(yytext); return CHAR_LITERAL; }  
 [a-zA-Z_][a-zA-Z0-9_]* { yylval.sval = strdup(yytext); return IDENTIFIER; }
 
 "+"                 { return '+'; }

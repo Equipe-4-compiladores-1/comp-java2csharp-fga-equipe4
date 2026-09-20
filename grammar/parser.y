@@ -60,7 +60,7 @@ function_list:
 
 type_specifier:
     TYPE_INT  { $$ = strdup("int"); }
-    | TYPE_BOOL { $$ = strdup("bool"); }
+    | TYPE_BOOL { $$ = strdup("boolean"); }
     | TYPE_VOID { $$ = strdup("void"); }
     | TYPE_DOUBLE { $$ = strdup("double"); }
     | TYPE_FLOAT  { $$ = strdup("float"); }
@@ -70,7 +70,7 @@ type_specifier:
 
 function_decl:
     type_specifier IDENTIFIER '(' param_list_opt ')' '{' stmt_list '}' {
-        auto func = std::make_shared<FunctionDeclNode>($1, $2, *$4); // <-- Passando *$4
+        auto func = std::make_shared<FunctionDeclNode>($1, $2, *$4);
         func->body = *$7;
         delete $4;
         delete $7;
@@ -158,10 +158,11 @@ expr:
     | CHAR_LITERAL    { $$ = new LiteralNode($1); free($1); }
     | STRING_LITERAL { $$ = new StringNode($1); free($1); } 
     | IDENTIFIER { 
-        $$ = new LiteralNode($1); // (Reutilizando o LiteralNode para facilitar)
+        $$ = new LiteralNode($1);
+        free($1);
     }
     | IDENTIFIER '(' expr_list_opt ')' {
-        $$ = new MethodCallExprNode($1, *$3);
+        $$ = new MethodCallExprNode(std::string($1), *$3);
         delete $3;
         free($1);
     }
