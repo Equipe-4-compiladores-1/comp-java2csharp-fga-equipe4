@@ -1,4 +1,4 @@
-# >> ------ Java2CSharp — Transpilador Java para C# ------ <<
+# Java2CSharp — Transpilador Java para C#
 
 ![C++](https://img.shields.io/badge/C++-00599C?logo=cplusplus&logoColor=white)
 ![CMake](https://img.shields.io/badge/CMake-064F8C?logo=cmake&logoColor=white)
