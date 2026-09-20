@@ -48,10 +48,14 @@ jobs:
       with:
         name: build-artifact
         path: build/
+    - name : Restaurar Permissões e Cache do CMake
+      run: |
+        chmod +x build/java2csharp
+        cd build && cmake ..
     - name: Executar Suíte de Testes
       run: |
         cd build
-        make test
+        CTEST_OUTPUT_ON_FAILURE=1 make test
     - name: Salvar dados de execução dos testes (.gcda)
       uses: actions/upload-artifact@v5  
       with:
