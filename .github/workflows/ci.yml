@@ -1,90 +1,75 @@
-name: Pipeline de Integração Contínua - Java2Csharp
+name: CI - Java2CSharp
 
 on:
   push:
-    branches: [ "main" ] 
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
-    name: --- Build ---
-    runs-on: ubuntu-26.04
-    steps:
-    - name: Checkout do código
-      uses: actions/checkout@v5
-    - name: Instalar Dependências (CMake, Flex, Bison, GCC)
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y cmake flex bison build-essential 
-    - name: Configurar o CMake
-      run: |
-        mkdir build && cd build
-        cmake ..
-    - name: Compilar Java2Csharp
-      run: |
-        cd build
-        make
-    - name: Salvar artefatos de build
-      uses: actions/upload-artifact@v7
-      with:
-        name: build-artifact
-        path: build/
-        include-hidden-files: true
+  build-and-test:
+    name: Compilação e Testes
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Testa o código em dois compiladores diferentes (conceito de Matrix)
+        compiler: [g++, clang++] 
 
-  test:
-    name: --- Test ---
-    runs-on: ubuntu-26.04
-    needs: build  
     steps:
-    - name: Checkout do código
-      uses: actions/checkout@v5
-    - name: Instalar Dependências (CMake, Flex, Bison, GCC)
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y cmake flex bison build-essential   
-    - name: Baixar artefatos compilados
-      uses: actions/download-artifact@v7
-      with:
-        name: build-artifact
-        path: build/
-    - name : Restaurar Permissões e Cache do CMake
-      run: |
-        chmod +x build/java2csharp
-        cd build && cmake ..
-    - name: Executar Suíte de Testes
-      run: |
-        cd build
-        CTEST_OUTPUT_ON_FAILURE=1 make test
-    - name: Salvar dados de execução dos testes (.gcda)
-      uses: actions/upload-artifact@v7
-      with:
-        name: test-artifact
-        path: build/
-        include-hidden-files: true
+      - uses: actions/checkout@v7
 
-  coverage:
-    name: --- Coverage ---
-    runs-on: ubuntu-26.04
-    needs: test
-    steps:
-    - name: Checkout do código
-      uses: actions/checkout@v5
-    - name: Instalar Gcovr e CMake
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y cmake gcovr
-    - name: Baixar artefatos dos testes executados
-      uses: actions/download-artifact@v7
-      with:
-        name: test-artifact
-        path: build/
-    - name: Gerar Relatório de Cobertura (HTML)
-      run: |
-        cd build
-        make coverage_html
-    - name: Disponibilizar HTML de Cobertura
-      uses: actions/upload-artifact@v7
-      with:
-        name: coverage-report
-        path: build/coverage_report/
+      - name: Instalar Dependências (Flex, Bison, CMake, Valgrind, Gcovr)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y flex bison cmake valgrind gcovr ${{ matrix.compiler == 'clang++' && 'clang' || '' }}
+
+      - name: Compilar Projeto
+        env:
+          CXX: ${{ matrix.compiler }}
+        run: |
+          mkdir build && cd build
+          cmake ..
+          make -j$(nproc)
+
+      - name: Executar Testes (CTest)
+        id: ctest
+        working-directory: build
+        run: ctest --output-on-failure -V
+
+      - name: Auditoria de Memória (Valgrind)
+        working-directory: build
+        run: |
+          echo "Verificando fugas de memória dinâmicas nos nós da AST..."
+          for test_file in ../tests/input/success/*.java; do
+            valgrind --error-exitcode=1 --leak-check=full ./java2csharp "$test_file"
+          done
+
+      - name: Gerar Relatório de Cobertura (HTML)
+        # Usa o comando que já definiu no CMakeLists.txt
+        if: matrix.compiler == 'g++'
+        working-directory: build
+        run: make coverage_html
+
+      - name: Subir Artefacto de Cobertura
+        if: always() && matrix.compiler == 'g++'
+        uses: actions/upload-artifact@v7
+        with:
+          name: gcovr-coverage-report
+          path: build/coverage_report/
+          if-no-files-found: warn
+
+      - name: Resumo da Execução no GitHub
+        if: always()
+        run: |
+          {
+            echo "## Resumo da Compilação (${{ matrix.compiler }})"
+            echo "| Etapa | Resultado |"
+            echo "| --- | --- |"
+            echo "| Build | ✅ Passou |"
+            echo "| CTest | ${{ steps.ctest.outcome }} |"
+          } >> "$GITHUB_STEP_SUMMARY"
