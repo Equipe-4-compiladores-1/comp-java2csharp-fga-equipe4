@@ -80,6 +80,8 @@ function_decl:
         delete $4;
         delete $7;
         programFunctions.push_back(func);
+        free($1);
+        free($2);
     }
     | PUBLIC STATIC TYPE_VOID IDENTIFIER '(' TYPE_STRING '[' ']' IDENTIFIER ')' '{' stmt_list '}' {
         /* Mantemos o main fixo para facilitar */
@@ -87,6 +89,8 @@ function_decl:
         func->body = *($<stmt_list>12);
         delete $<stmt_list>12;
         programFunctions.push_back(func);
+        free($<sval>3);
+        free($<sval>4);
     }
     ;
 class_decl:
@@ -95,6 +99,7 @@ class_decl:
         classNode->functions = programFunctions;
         programFunctions.clear();
         rootNode = classNode;
+        free($2);
     }
     ;
 
