@@ -25,14 +25,9 @@ std::shared_ptr<ClassDeclNode> rootNode;
     std::vector<std::shared_ptr<ExprNode>>* expr_list;
 }
 
-%token <sval> IDENTIFIER TYPE_INT TYPE_BOOL TYPE_VOID INT_LITERAL
-%token RETURN
-%token CLASS
-%token PUBLIC STATIC TYPE_STRING
-%token PRINT PRINTLN PRINTF
-%token <sval> STRING_LITERAL
-%token <sval> TYPE_DOUBLE TYPE_FLOAT TYPE_CHAR TYPE_LONG
-%token <sval> FLOAT_LITERAL CHAR_LITERAL
+%token <sval> IDENTIFIER INT_LITERAL FLOAT_LITERAL CHAR_LITERAL STRING_LITERAL
+%token TYPE_INT TYPE_DOUBLE TYPE_FLOAT TYPE_CHAR TYPE_LONG TYPE_BOOL TYPE_VOID
+%token RETURN CLASS PUBLIC STATIC TYPE_STRING PRINT PRINTLN PRINTF
 
 %destructor { free($$); } <sval>
 
@@ -64,13 +59,13 @@ function_list:
     ;
 
 type_specifier:
-    TYPE_INT  { $$ = $1; }
-    | TYPE_BOOL { $$ = $1; }
-    | TYPE_VOID { $$ = $1; }
-    | TYPE_DOUBLE { $$ = $1; }
-    | TYPE_FLOAT  { $$ = $1; }
-    | TYPE_CHAR   { $$ = $1; }
-    | TYPE_LONG   { $$ = $1; }
+    TYPE_INT  { $$ = strdup("int"); }
+    | TYPE_BOOL { $$ = strdup("bool"); }
+    | TYPE_VOID { $$ = strdup("void"); }
+    | TYPE_DOUBLE { $$ = strdup("double"); }
+    | TYPE_FLOAT  { $$ = strdup("float"); }
+    | TYPE_CHAR   { $$ = strdup("char"); }
+    | TYPE_LONG   { $$ = strdup("long"); }
     ;
 
 function_decl:
@@ -84,11 +79,10 @@ function_decl:
         free($2);
     }
     | PUBLIC STATIC TYPE_VOID IDENTIFIER '(' TYPE_STRING '[' ']' IDENTIFIER ')' '{' stmt_list '}' {
-        auto func = std::make_shared<FunctionDeclNode>($3, $4);
+        auto func = std::make_shared<FunctionDeclNode>("void", $4);
         func->body = *$12;
         delete $12;
         programFunctions.push_back(func);
-        free($3);
         free($4);
         free($9);
     }

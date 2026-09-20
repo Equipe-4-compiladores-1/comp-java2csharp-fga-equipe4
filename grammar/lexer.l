@@ -12,13 +12,13 @@
 [ \t\r\n]+          ; // Ignora espaços em branco
 
 "class"             { return CLASS; }
-"int"               { yylval.sval = strdup(yytext); return TYPE_INT; }
-"double"            { yylval.sval = strdup(yytext); return TYPE_DOUBLE; } 
-"float"             { yylval.sval = strdup(yytext); return TYPE_FLOAT; }  
-"char"              { yylval.sval = strdup(yytext); return TYPE_CHAR; }  
-"long"              { yylval.sval = strdup(yytext); return TYPE_LONG; }
-"boolean"           { yylval.sval = strdup(yytext); return TYPE_BOOL; }
-"void"              { yylval.sval = strdup(yytext); return TYPE_VOID; }
+"int"               { return TYPE_INT; }
+"double"            { return TYPE_DOUBLE; } 
+"float"             { return TYPE_FLOAT; }  
+"char"              { return TYPE_CHAR; }  
+"long"              { return TYPE_LONG; }
+"boolean"           { return TYPE_BOOL; }
+"void"              { return TYPE_VOID; }
 "return"            { return RETURN; }
 "public"            { return PUBLIC; }
 "static"            { return STATIC; }
