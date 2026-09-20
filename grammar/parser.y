@@ -146,16 +146,18 @@ stmt:
 var_decl:
     type_specifier IDENTIFIER '=' expr {
         $$ = new VarDeclNode($1, $2, std::shared_ptr<ExprNode>($4));
+        free($1);
+        free($2);
     }
     ;
 
 
 
 expr:
-      INT_LITERAL { $$ = new LiteralNode($1); }
-    | FLOAT_LITERAL   { $$ = new LiteralNode($1); } 
-    | CHAR_LITERAL    { $$ = new LiteralNode($1); }
-    | STRING_LITERAL { $$ = new StringNode($1); } 
+      INT_LITERAL { $$ = new LiteralNode($1); free($1); }
+    | FLOAT_LITERAL   { $$ = new LiteralNode($1); free($1); } 
+    | CHAR_LITERAL    { $$ = new LiteralNode($1); free($1); }
+    | STRING_LITERAL { $$ = new StringNode($1); free($1); } 
     | IDENTIFIER { 
         $$ = new LiteralNode($1); // (Reutilizando o LiteralNode para facilitar)
     }
@@ -214,6 +216,8 @@ param_list:
 param:
     type_specifier IDENTIFIER { 
         $$ = new Param($1, $2); 
+        free($1);
+        free($2);
     }
     ;
 printf_args_opt:
