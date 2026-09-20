@@ -84,13 +84,13 @@ function_decl:
         free($2);
     }
     | PUBLIC STATIC TYPE_VOID IDENTIFIER '(' TYPE_STRING '[' ']' IDENTIFIER ')' '{' stmt_list '}' {
-        /* Mantemos o main fixo para facilitar */
-        auto func = std::make_shared<FunctionDeclNode>($<sval>3, $<sval>4);
-        func->body = *($<stmt_list>12);
-        delete $<stmt_list>12;
+        auto func = std::make_shared<FunctionDeclNode>($3, $4);
+        func->body = *$12;
+        delete $12;
         programFunctions.push_back(func);
-        free($<sval>3);
-        free($<sval>4);
+        free($3);
+        free($4);
+        free($9);
     }
     ;
 class_decl:

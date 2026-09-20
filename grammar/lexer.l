@@ -11,7 +11,7 @@
 
 [ \t\r\n]+          ; // Ignora espaços em branco
 
-"class"             { return CLASS;}
+"class"             { return CLASS; }
 "int"               { yylval.sval = strdup(yytext); return TYPE_INT; }
 "double"            { yylval.sval = strdup(yytext); return TYPE_DOUBLE; } 
 "float"             { yylval.sval = strdup(yytext); return TYPE_FLOAT; }  
