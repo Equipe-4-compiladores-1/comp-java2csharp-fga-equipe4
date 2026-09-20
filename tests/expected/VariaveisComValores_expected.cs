@@ -1,4 +1,5 @@
 using System;
+
 namespace TranspiledProgram {
     public static class VariaveisComValores {
         public static void Main(string[] args) {
