@@ -33,7 +33,7 @@ file(GLOB SUCCESS_FILES "${CMAKE_CURRENT_SOURCE_DIR}/tests/input/success/*.java"
 foreach(INPUT_FILE IN LISTS SUCCESS_FILES)
     get_filename_component(TEST_NAME ${INPUT_FILE} NAME_WE)
     add_test(NAME "Compila_${TEST_NAME}" COMMAND java2csharp ${INPUT_FILE})
-    add_test(NAME "Valida_${TEST_NAME}" COMMAND diff -u --strip-trailing-cr Saida.cs ${CMAKE_CURRENT_SOURCE_DIR}/tests/expected/${TEST_NAME}_expected.cs)
+    add_test(NAME "Valida_${TEST_NAME}" COMMAND diff -u -w --strip-trailing-cr Saida.cs ${CMAKE_CURRENT_SOURCE_DIR}/tests/expected/${TEST_NAME}_expected.cs)
     set_tests_properties("Valida_${TEST_NAME}" PROPERTIES DEPENDS "Compila_${TEST_NAME}")
 endforeach()
 

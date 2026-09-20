@@ -25,14 +25,11 @@ std::shared_ptr<ClassDeclNode> rootNode;
     std::vector<std::shared_ptr<ExprNode>>* expr_list;
 }
 
-%token <sval> IDENTIFIER TYPE_INT TYPE_BOOL TYPE_VOID INT_LITERAL
-%token RETURN
-%token CLASS
-%token PUBLIC STATIC TYPE_STRING
-%token PRINT PRINTLN PRINTF
-%token <sval> STRING_LITERAL
-%token <sval> TYPE_DOUBLE TYPE_FLOAT TYPE_CHAR TYPE_LONG
-%token <sval> FLOAT_LITERAL CHAR_LITERAL
+%token <sval> IDENTIFIER INT_LITERAL FLOAT_LITERAL CHAR_LITERAL STRING_LITERAL
+%token TYPE_INT TYPE_DOUBLE TYPE_FLOAT TYPE_CHAR TYPE_LONG TYPE_BOOL TYPE_VOID
+%token RETURN CLASS PUBLIC STATIC TYPE_STRING PRINT PRINTLN PRINTF
+
+%destructor { free($$); } <sval>
 
 %type <stmt> var_decl stmt
 %type <expr> expr
@@ -62,29 +59,32 @@ function_list:
     ;
 
 type_specifier:
-    TYPE_INT  { $$ = $1; }
-    | TYPE_BOOL { $$ = $1; }
-    | TYPE_VOID { $$ = $1; }
-    | TYPE_DOUBLE { $$ = $1; }
-    | TYPE_FLOAT  { $$ = $1; }
-    | TYPE_CHAR   { $$ = $1; }
-    | TYPE_LONG   { $$ = $1; }
+    TYPE_INT  { $$ = strdup("int"); }
+    | TYPE_BOOL { $$ = strdup("boolean"); }
+    | TYPE_VOID { $$ = strdup("void"); }
+    | TYPE_DOUBLE { $$ = strdup("double"); }
+    | TYPE_FLOAT  { $$ = strdup("float"); }
+    | TYPE_CHAR   { $$ = strdup("char"); }
+    | TYPE_LONG   { $$ = strdup("long"); }
     ;
 
 function_decl:
     type_specifier IDENTIFIER '(' param_list_opt ')' '{' stmt_list '}' {
-        auto func = std::make_shared<FunctionDeclNode>($1, $2, *$4); // <-- Passando *$4
+        auto func = std::make_shared<FunctionDeclNode>($1, $2, *$4);
         func->body = *$7;
         delete $4;
         delete $7;
         programFunctions.push_back(func);
+        free($1);
+        free($2);
     }
     | PUBLIC STATIC TYPE_VOID IDENTIFIER '(' TYPE_STRING '[' ']' IDENTIFIER ')' '{' stmt_list '}' {
-        /* Mantemos o main fixo para facilitar */
-        auto func = std::make_shared<FunctionDeclNode>($<sval>3, $<sval>4);
-        func->body = *($<stmt_list>12);
-        delete $<stmt_list>12;
+        auto func = std::make_shared<FunctionDeclNode>("void", $4);
+        func->body = *$12;
+        delete $12;
         programFunctions.push_back(func);
+        free($4);
+        free($9);
     }
     ;
 class_decl:
@@ -93,6 +93,7 @@ class_decl:
         classNode->functions = programFunctions;
         programFunctions.clear();
         rootNode = classNode;
+        free($2);
     }
     ;
 
@@ -130,38 +131,47 @@ stmt:
     | IDENTIFIER '(' expr_list_opt ')' ';' {
         $$ = new MethodCallStmtNode($1, *$3);
         delete $3;
+        free($1);
     }
     | IDENTIFIER '.' IDENTIFIER '(' expr_list_opt ')' ';' { 
         std::string qualifiedName = std::string($1) + "." + std::string($3);
         $$ = new MethodCallStmtNode(qualifiedName, *$5);
         delete $5;
+        free($1);
+        free($3);
     }
     ;
 
 var_decl:
     type_specifier IDENTIFIER '=' expr {
         $$ = new VarDeclNode($1, $2, std::shared_ptr<ExprNode>($4));
+        free($1);
+        free($2);
     }
     ;
 
 
 
 expr:
-      INT_LITERAL { $$ = new LiteralNode($1); }
-    | FLOAT_LITERAL   { $$ = new LiteralNode($1); } 
-    | CHAR_LITERAL    { $$ = new LiteralNode($1); }
-    | STRING_LITERAL { $$ = new StringNode($1); } 
+      INT_LITERAL { $$ = new LiteralNode($1); free($1); }
+    | FLOAT_LITERAL   { $$ = new LiteralNode($1); free($1); } 
+    | CHAR_LITERAL    { $$ = new LiteralNode($1); free($1); }
+    | STRING_LITERAL { $$ = new StringNode($1); free($1); } 
     | IDENTIFIER { 
-        $$ = new LiteralNode($1); // (Reutilizando o LiteralNode para facilitar)
+        $$ = new LiteralNode($1);
+        free($1);
     }
     | IDENTIFIER '(' expr_list_opt ')' {
-        $$ = new MethodCallExprNode($1, *$3);
+        $$ = new MethodCallExprNode(std::string($1), *$3);
         delete $3;
+        free($1);
     }
     | IDENTIFIER '.' IDENTIFIER '(' expr_list_opt ')' {
         std::string qualifiedName = std::string($1) + "." + std::string($3);
         $$ = new MethodCallExprNode(qualifiedName, *$5);
         delete $5;
+        free($1);
+        free($3);
     }
     | expr '+' expr { $$ = new BinaryExprNode("+", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
     | expr '-' expr { $$ = new BinaryExprNode("-", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
@@ -206,6 +216,8 @@ param_list:
 param:
     type_specifier IDENTIFIER { 
         $$ = new Param($1, $2); 
+        free($1);
+        free($2);
     }
     ;
 printf_args_opt:

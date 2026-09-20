@@ -8,5 +8,4 @@ class VariaveisComValores {
 
         char c = 'c';
     }
-    
 }
