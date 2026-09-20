@@ -28,7 +28,7 @@ jobs:
     - name: Salvar artefatos de build
       uses: actions/upload-artifact@v5
       with:
-        name: build-artifacts
+        name: build-artifact
         path: build/
         include-hidden-files: true
 
