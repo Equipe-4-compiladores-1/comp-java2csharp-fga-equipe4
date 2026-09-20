@@ -34,6 +34,8 @@ std::shared_ptr<ClassDeclNode> rootNode;
 %token <sval> TYPE_DOUBLE TYPE_FLOAT TYPE_CHAR TYPE_LONG
 %token <sval> FLOAT_LITERAL CHAR_LITERAL
 
+%destructor { free($$); } <sval>
+
 %type <stmt> var_decl stmt
 %type <expr> expr
 %type <stmt_list> stmt_list
@@ -130,11 +132,14 @@ stmt:
     | IDENTIFIER '(' expr_list_opt ')' ';' {
         $$ = new MethodCallStmtNode($1, *$3);
         delete $3;
+        free($1);
     }
     | IDENTIFIER '.' IDENTIFIER '(' expr_list_opt ')' ';' { 
         std::string qualifiedName = std::string($1) + "." + std::string($3);
         $$ = new MethodCallStmtNode(qualifiedName, *$5);
         delete $5;
+        free($1);
+        free($3);
     }
     ;
 
@@ -157,11 +162,14 @@ expr:
     | IDENTIFIER '(' expr_list_opt ')' {
         $$ = new MethodCallExprNode($1, *$3);
         delete $3;
+        free($1);
     }
     | IDENTIFIER '.' IDENTIFIER '(' expr_list_opt ')' {
         std::string qualifiedName = std::string($1) + "." + std::string($3);
         $$ = new MethodCallExprNode(qualifiedName, *$5);
         delete $5;
+        free($1);
+        free($3);
     }
     | expr '+' expr { $$ = new BinaryExprNode("+", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
     | expr '-' expr { $$ = new BinaryExprNode("-", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
