@@ -10,11 +10,6 @@ Compila_Semantico_03_Redefinida 0 0
 Valida_Semantico_03_Redefinida 0 0
 Compila_Semantico_04_Parametro 0 0
 Valida_Semantico_04_Parametro 0 0
+Compila_IfElse_01 3 0.0243021
+Valida_IfElse_01 2 0.00354091
 ---
-Valida_MainComMetodo_01
-Compila_Semantico_02_NaoDeclarada
-Valida_Semantico_02_NaoDeclarada
-Compila_Semantico_03_Redefinida
-Valida_Semantico_03_Redefinida
-Compila_Semantico_04_Parametro
-Valida_Semantico_04_Parametro

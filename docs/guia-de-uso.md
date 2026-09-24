@@ -54,10 +54,6 @@ cmake --build build-wsl
 
 O executável estará em `build-wsl/java2csharp`.
 
-### Abrir automaticamente no WSL pelo VS Code
-
-Abra o arquivo `comp-java2csharp-wsl.code-workspace` pelo VS Code. Ele solicita a extensão **Remote - WSL**, abre o projeto na distribuição Ubuntu e configura o CMake para usar `build-wsl` automaticamente. Assim, os comandos do terminal usam o ambiente Linux, mesmo que o VS Code tenha sido iniciado pelo Windows PowerShell.
-
 Após o término da compilação, o executável (ex: `java2csharp`) estará disponível dentro do diretório `build`.
 
 ## :material-play-circle: Como Executar

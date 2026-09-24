@@ -120,50 +120,61 @@ enum yysymbol_kind_t
   YYSYMBOL_TYPE_VOID = 6,                  /* TYPE_VOID  */
   YYSYMBOL_INT_LITERAL = 7,                /* INT_LITERAL  */
   YYSYMBOL_RETURN = 8,                     /* RETURN  */
-  YYSYMBOL_CLASS = 9,                      /* CLASS  */
-  YYSYMBOL_PUBLIC = 10,                    /* PUBLIC  */
-  YYSYMBOL_STATIC = 11,                    /* STATIC  */
-  YYSYMBOL_TYPE_STRING = 12,               /* TYPE_STRING  */
-  YYSYMBOL_PRINT = 13,                     /* PRINT  */
-  YYSYMBOL_PRINTLN = 14,                   /* PRINTLN  */
-  YYSYMBOL_PRINTF = 15,                    /* PRINTF  */
-  YYSYMBOL_STRING_LITERAL = 16,            /* STRING_LITERAL  */
-  YYSYMBOL_TYPE_DOUBLE = 17,               /* TYPE_DOUBLE  */
-  YYSYMBOL_TYPE_FLOAT = 18,                /* TYPE_FLOAT  */
-  YYSYMBOL_TYPE_CHAR = 19,                 /* TYPE_CHAR  */
-  YYSYMBOL_TYPE_LONG = 20,                 /* TYPE_LONG  */
-  YYSYMBOL_FLOAT_LITERAL = 21,             /* FLOAT_LITERAL  */
-  YYSYMBOL_CHAR_LITERAL = 22,              /* CHAR_LITERAL  */
-  YYSYMBOL_23_ = 23,                       /* '+'  */
-  YYSYMBOL_24_ = 24,                       /* '-'  */
-  YYSYMBOL_25_ = 25,                       /* '*'  */
-  YYSYMBOL_26_ = 26,                       /* '/'  */
-  YYSYMBOL_27_ = 27,                       /* '('  */
-  YYSYMBOL_28_ = 28,                       /* ')'  */
-  YYSYMBOL_29_ = 29,                       /* '{'  */
-  YYSYMBOL_30_ = 30,                       /* '}'  */
-  YYSYMBOL_31_ = 31,                       /* '['  */
-  YYSYMBOL_32_ = 32,                       /* ']'  */
-  YYSYMBOL_33_ = 33,                       /* ';'  */
-  YYSYMBOL_34_ = 34,                       /* '.'  */
-  YYSYMBOL_35_ = 35,                       /* '='  */
-  YYSYMBOL_36_ = 36,                       /* ','  */
-  YYSYMBOL_YYACCEPT = 37,                  /* $accept  */
-  YYSYMBOL_program = 38,                   /* program  */
-  YYSYMBOL_function_list = 39,             /* function_list  */
-  YYSYMBOL_type_specifier = 40,            /* type_specifier  */
-  YYSYMBOL_function_decl = 41,             /* function_decl  */
-  YYSYMBOL_class_decl = 42,                /* class_decl  */
-  YYSYMBOL_stmt_list = 43,                 /* stmt_list  */
-  YYSYMBOL_stmt = 44,                      /* stmt  */
-  YYSYMBOL_var_decl = 45,                  /* var_decl  */
-  YYSYMBOL_expr = 46,                      /* expr  */
-  YYSYMBOL_expr_list = 47,                 /* expr_list  */
-  YYSYMBOL_expr_list_opt = 48,             /* expr_list_opt  */
-  YYSYMBOL_param_list_opt = 49,            /* param_list_opt  */
-  YYSYMBOL_param_list = 50,                /* param_list  */
-  YYSYMBOL_param = 51,                     /* param  */
-  YYSYMBOL_printf_args_opt = 52            /* printf_args_opt  */
+  YYSYMBOL_IF = 9,                         /* IF  */
+  YYSYMBOL_ELSE = 10,                      /* ELSE  */
+  YYSYMBOL_TRUE = 11,                      /* TRUE  */
+  YYSYMBOL_FALSE = 12,                     /* FALSE  */
+  YYSYMBOL_EQ = 13,                        /* EQ  */
+  YYSYMBOL_NE = 14,                        /* NE  */
+  YYSYMBOL_LT = 15,                        /* LT  */
+  YYSYMBOL_LE = 16,                        /* LE  */
+  YYSYMBOL_GT = 17,                        /* GT  */
+  YYSYMBOL_GE = 18,                        /* GE  */
+  YYSYMBOL_CLASS = 19,                     /* CLASS  */
+  YYSYMBOL_PUBLIC = 20,                    /* PUBLIC  */
+  YYSYMBOL_STATIC = 21,                    /* STATIC  */
+  YYSYMBOL_TYPE_STRING = 22,               /* TYPE_STRING  */
+  YYSYMBOL_PRINT = 23,                     /* PRINT  */
+  YYSYMBOL_PRINTLN = 24,                   /* PRINTLN  */
+  YYSYMBOL_PRINTF = 25,                    /* PRINTF  */
+  YYSYMBOL_STRING_LITERAL = 26,            /* STRING_LITERAL  */
+  YYSYMBOL_TYPE_DOUBLE = 27,               /* TYPE_DOUBLE  */
+  YYSYMBOL_TYPE_FLOAT = 28,                /* TYPE_FLOAT  */
+  YYSYMBOL_TYPE_CHAR = 29,                 /* TYPE_CHAR  */
+  YYSYMBOL_TYPE_LONG = 30,                 /* TYPE_LONG  */
+  YYSYMBOL_FLOAT_LITERAL = 31,             /* FLOAT_LITERAL  */
+  YYSYMBOL_CHAR_LITERAL = 32,              /* CHAR_LITERAL  */
+  YYSYMBOL_33_ = 33,                       /* '+'  */
+  YYSYMBOL_34_ = 34,                       /* '-'  */
+  YYSYMBOL_35_ = 35,                       /* '*'  */
+  YYSYMBOL_36_ = 36,                       /* '/'  */
+  YYSYMBOL_37_ = 37,                       /* '('  */
+  YYSYMBOL_38_ = 38,                       /* ')'  */
+  YYSYMBOL_39_ = 39,                       /* '{'  */
+  YYSYMBOL_40_ = 40,                       /* '}'  */
+  YYSYMBOL_41_ = 41,                       /* '['  */
+  YYSYMBOL_42_ = 42,                       /* ']'  */
+  YYSYMBOL_43_ = 43,                       /* ';'  */
+  YYSYMBOL_44_ = 44,                       /* '.'  */
+  YYSYMBOL_45_ = 45,                       /* '='  */
+  YYSYMBOL_46_ = 46,                       /* ','  */
+  YYSYMBOL_YYACCEPT = 47,                  /* $accept  */
+  YYSYMBOL_program = 48,                   /* program  */
+  YYSYMBOL_function_list = 49,             /* function_list  */
+  YYSYMBOL_type_specifier = 50,            /* type_specifier  */
+  YYSYMBOL_function_decl = 51,             /* function_decl  */
+  YYSYMBOL_class_decl = 52,                /* class_decl  */
+  YYSYMBOL_stmt_list = 53,                 /* stmt_list  */
+  YYSYMBOL_stmt = 54,                      /* stmt  */
+  YYSYMBOL_else_opt = 55,                  /* else_opt  */
+  YYSYMBOL_var_decl = 56,                  /* var_decl  */
+  YYSYMBOL_expr = 57,                      /* expr  */
+  YYSYMBOL_expr_list = 58,                 /* expr_list  */
+  YYSYMBOL_expr_list_opt = 59,             /* expr_list_opt  */
+  YYSYMBOL_param_list_opt = 60,            /* param_list_opt  */
+  YYSYMBOL_param_list = 61,                /* param_list  */
+  YYSYMBOL_param = 62,                     /* param  */
+  YYSYMBOL_printf_args_opt = 63            /* printf_args_opt  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -280,7 +291,7 @@ typedef int yytype_uint16;
 
 
 /* Stored state numbers (used for stacks). */
-typedef yytype_int8 yy_state_t;
+typedef yytype_uint8 yy_state_t;
 
 /* State numbers in computations.  */
 typedef int yy_state_fast_t;
@@ -491,19 +502,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  5
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   151
+#define YYLAST   255
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  37
+#define YYNTOKENS  47
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  16
+#define YYNNTS  17
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  47
+#define YYNRULES  58
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  110
+#define YYNSTATES  136
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   277
+#define YYMAXUTOK   287
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -521,15 +532,15 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-      27,    28,    25,    23,    36,    24,    34,    26,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,    33,
-       2,    35,     2,     2,     2,     2,     2,     2,     2,     2,
+      37,    38,    35,    33,    46,    34,    44,    36,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,    43,
+       2,    45,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,    31,     2,    32,     2,     2,     2,     2,     2,     2,
+       2,    41,     2,    42,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,    29,     2,    30,     2,     2,     2,     2,
+       2,     2,     2,    39,     2,    40,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -544,18 +555,20 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    26,    27,    28,    29,    30,    31,    32
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    56,    56,    60,    61,    65,    66,    67,    68,    69,
-      70,    71,    75,    82,    91,   100,   101,   108,   109,   110,
-     111,   112,   113,   130,   134,   142,   150,   151,   152,   153,
-     154,   157,   161,   166,   167,   168,   169,   173,   177,   184,
-     185,   189,   190,   194,   199,   207,   212,   213
+       0,    59,    59,    63,    64,    68,    69,    70,    71,    72,
+      73,    74,    78,    85,    94,   103,   104,   111,   112,   113,
+     114,   115,   116,   133,   137,   142,   155,   156,   160,   168,
+     169,   170,   171,   172,   173,   174,   177,   181,   186,   187,
+     188,   189,   190,   191,   192,   193,   194,   195,   199,   203,
+     210,   211,   215,   216,   220,   225,   233,   238,   239
 };
 #endif
 
@@ -573,20 +586,22 @@ yysymbol_name (yysymbol_kind_t yysymbol)
   static const char *const yy_sname[] =
   {
   "end of file", "error", "invalid token", "IDENTIFIER", "TYPE_INT",
-  "TYPE_BOOL", "TYPE_VOID", "INT_LITERAL", "RETURN", "CLASS", "PUBLIC",
-  "STATIC", "TYPE_STRING", "PRINT", "PRINTLN", "PRINTF", "STRING_LITERAL",
+  "TYPE_BOOL", "TYPE_VOID", "INT_LITERAL", "RETURN", "IF", "ELSE", "TRUE",
+  "FALSE", "EQ", "NE", "LT", "LE", "GT", "GE", "CLASS", "PUBLIC", "STATIC",
+  "TYPE_STRING", "PRINT", "PRINTLN", "PRINTF", "STRING_LITERAL",
   "TYPE_DOUBLE", "TYPE_FLOAT", "TYPE_CHAR", "TYPE_LONG", "FLOAT_LITERAL",
   "CHAR_LITERAL", "'+'", "'-'", "'*'", "'/'", "'('", "')'", "'{'", "'}'",
   "'['", "']'", "';'", "'.'", "'='", "','", "$accept", "program",
   "function_list", "type_specifier", "function_decl", "class_decl",
-  "stmt_list", "stmt", "var_decl", "expr", "expr_list", "expr_list_opt",
-  "param_list_opt", "param_list", "param", "printf_args_opt", YY_NULLPTR
+  "stmt_list", "stmt", "else_opt", "var_decl", "expr", "expr_list",
+  "expr_list_opt", "param_list_opt", "param_list", "param",
+  "printf_args_opt", YY_NULLPTR
   };
   return yy_sname[yysymbol];
 }
 #endif
 
-#define YYPACT_NINF (-65)
+#define YYPACT_NINF (-90)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -598,19 +613,22 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-static const yytype_int8 yypact[] =
+static const yytype_int16 yypact[] =
 {
-      -7,     2,     7,   -65,    -6,   -65,    93,   -65,   -65,   -65,
-      11,   -65,   -65,   -65,   -65,    76,    22,   -65,    30,   -65,
-     -65,     1,    34,   103,    13,    43,    27,    24,   -65,    49,
-     -65,    37,   103,    44,   -65,   -65,    36,    39,    67,   -24,
-       5,    56,    57,    58,   -65,    84,   -65,    55,    62,     8,
-      88,   -21,   -65,   -65,   -65,   -65,   -65,    91,     8,     8,
-      85,    65,   -65,    63,    25,    66,    77,    92,     8,   101,
-       8,     8,     8,     8,   -65,   102,   108,    82,     8,   -65,
-       8,    96,     8,   107,   110,    -9,    -9,   -65,   -65,   105,
-     106,     8,   112,    25,    59,    25,   -65,   113,   -65,     8,
-     -65,   -65,    66,   109,   -65,   111,   115,   -65,   -65,   -65
+     -15,    10,    19,   -90,   -19,   -90,   155,   -90,   -90,   -90,
+       5,   -90,   -90,   -90,   -90,   138,    24,   -90,    22,   -90,
+     -90,    -5,    30,   175,     8,    44,    14,     7,   -90,    38,
+     -90,    25,   175,    26,   -90,   -90,    21,    53,    62,   -32,
+      43,    29,    31,    34,    35,   -90,    70,   -90,    41,    47,
+      -1,    85,   -30,   -90,   -90,   -90,   -90,   -90,   -90,   -90,
+     156,    -1,    -1,    -1,    75,    59,   -90,    66,   219,    60,
+      69,    71,    -1,   109,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,   -90,   180,   193,   206,    74,    -1,
+     -90,    -1,    82,    -1,    93,    98,   -18,   -18,   -18,   -18,
+     -18,   -18,   -27,   -27,   -90,   -90,    97,    95,    96,    -1,
+      99,   219,    86,   219,   -90,   102,   -90,    -1,   -90,   -90,
+     -90,    60,   103,   -90,   107,   117,    94,   -90,   -90,   -90,
+     131,   106,   -90,   -90,   124,   -90
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -620,99 +638,126 @@ static const yytype_int8 yydefact[] =
 {
        0,     0,     0,     2,     0,     1,     0,     5,     6,     7,
        0,     8,     9,    10,    11,     0,     0,     3,     0,    14,
-       4,     0,     0,    41,     0,     0,     0,    42,    43,     0,
-      45,     0,     0,     0,    15,    44,     0,     0,     0,     0,
-       0,     0,     0,     0,    12,     0,    16,     0,     0,    39,
-       0,    30,    26,    29,    27,    28,    19,     0,     0,     0,
-       0,     0,    17,     0,    37,    40,     0,     0,    39,     0,
-       0,     0,     0,     0,    18,     0,     0,    46,     0,    15,
-       0,     0,    39,     0,     0,    33,    34,    35,    36,     0,
-       0,     0,     0,    25,     0,    38,    23,     0,    31,    39,
-      20,    21,    47,     0,    13,     0,     0,    22,    24,    32
+       4,     0,     0,    52,     0,     0,     0,    53,    54,     0,
+      56,     0,     0,     0,    15,    55,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,    12,     0,    16,     0,     0,
+      50,     0,    35,    29,    33,    34,    32,    30,    31,    19,
+       0,     0,     0,     0,     0,     0,    17,     0,    48,    51,
+       0,     0,    50,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,    18,     0,     0,     0,    57,     0,
+      15,     0,     0,    50,     0,     0,    42,    43,    44,    45,
+      46,    47,    38,    39,    40,    41,     0,     0,     0,     0,
+       0,    28,     0,    49,    23,     0,    36,    50,    15,    20,
+      21,    58,     0,    13,     0,     0,     0,    22,    24,    37,
+      26,     0,    25,    15,     0,    27
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -65,   -65,   -65,   -23,   130,   -65,    68,   -65,   -65,   -39,
-      60,   -64,   -65,   -65,   114,   -65
+     -90,   -90,   -90,    64,   141,   -90,   -89,   -90,   -90,   -90,
+     -40,    48,   -69,   -90,   -90,   130,   -90
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_int8 yydefgoto[] =
+static const yytype_uint8 yydefgoto[] =
 {
-       0,     2,    15,    16,    17,     3,    37,    46,    47,    64,
-      65,    66,    26,    27,    28,    92
+       0,     2,    15,    46,    17,     3,    37,    47,   132,    48,
+      68,    69,    70,    26,    27,    28,   110
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
    positive, shift that token.  If negative, reduce the rule whose
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
-static const yytype_int8 yytable[] =
+static const yytype_uint8 yytable[] =
 {
-      25,    57,     1,    49,    83,     4,    68,     5,    51,    25,
-      50,    51,    52,    69,    45,    52,    72,    73,    97,    75,
-      76,    53,    18,     6,    53,    21,    54,    55,    23,    54,
-      55,    85,    86,    87,    88,   106,    22,    24,    56,    93,
-      29,    95,    39,     7,     8,     9,    30,    40,    70,    71,
-      72,    73,    41,    42,    43,    31,    11,    12,    13,    14,
-      32,    33,    39,     7,     8,     9,    34,    40,    38,    44,
-      48,    45,    41,    42,    43,    36,    11,    12,    13,    14,
-       7,     8,     9,    58,    59,    60,    10,    61,    62,   104,
-      63,    67,    79,    11,    12,    13,    14,     7,     8,     9,
-      78,    77,    80,    10,    84,    81,    19,     7,     8,     9,
-      11,    12,    13,    14,    70,    71,    72,    73,    91,    82,
-      11,    12,    13,    14,    74,    70,    71,    72,    73,    96,
-      89,    70,    71,    72,    73,    98,    90,    99,   100,   101,
-     103,   105,   107,   109,   108,    20,    35,    94,     0,     0,
-       0,   102
+      60,   112,    52,    94,     1,    50,    53,    72,    82,    83,
+      54,    55,    51,     4,    73,    80,    81,    82,    83,     5,
+       6,    85,    86,    87,   115,    56,    18,    21,    22,   126,
+      57,    58,    23,    24,    96,    97,    98,    99,   100,   101,
+     102,   103,   104,   105,   134,    29,    52,    30,   125,   111,
+      53,   113,    31,    32,    54,    55,    39,     7,     8,     9,
+      33,    40,    41,    38,    34,    49,    61,    36,    62,    56,
+      16,    63,    64,    65,    57,    58,    42,    43,    44,    16,
+      11,    12,    13,    14,    66,    67,    59,    25,    71,    39,
+       7,     8,     9,    45,    40,    41,    25,    39,     7,     8,
+       9,    88,    40,    41,    89,    90,    91,    92,    93,    42,
+      43,    44,    95,    11,    12,    13,    14,    42,    43,    44,
+     109,    11,    12,    13,    14,   114,   123,    39,     7,     8,
+       9,   116,    40,    41,   130,   117,   118,   122,   119,   120,
+     124,   131,     7,     8,     9,   133,   127,    42,    43,    44,
+     128,    11,    12,    13,    14,   129,    20,   121,    10,     7,
+       8,     9,    35,     0,   135,    11,    12,    13,    14,    74,
+      75,    76,    77,    78,    79,    10,     0,     0,    19,     7,
+       8,     9,    11,    12,    13,    14,     0,     0,     0,    80,
+      81,    82,    83,    74,    75,    76,    77,    78,    79,    84,
+       0,     0,    11,    12,    13,    14,    74,    75,    76,    77,
+      78,    79,     0,    80,    81,    82,    83,     0,   106,    74,
+      75,    76,    77,    78,    79,     0,    80,    81,    82,    83,
+       0,   107,    74,    75,    76,    77,    78,    79,     0,    80,
+      81,    82,    83,     0,   108,     0,     0,     0,     0,     0,
+       0,     0,    80,    81,    82,    83
 };
 
-static const yytype_int8 yycheck[] =
+static const yytype_int16 yycheck[] =
 {
-      23,    40,     9,    27,    68,     3,    27,     0,     3,    32,
-      34,     3,     7,    34,    37,     7,    25,    26,    82,    58,
-      59,    16,    11,    29,    16,     3,    21,    22,    27,    21,
-      22,    70,    71,    72,    73,    99,     6,     3,    33,    78,
-      27,    80,     3,     4,     5,     6,     3,     8,    23,    24,
-      25,    26,    13,    14,    15,    28,    17,    18,    19,    20,
-      36,    12,     3,     4,     5,     6,    29,     8,    32,    30,
-       3,    94,    13,    14,    15,    31,    17,    18,    19,    20,
-       4,     5,     6,    27,    27,    27,    10,     3,    33,    30,
-      28,     3,    29,    17,    18,    19,    20,     4,     5,     6,
-      35,    16,    36,    10,     3,    28,    30,     4,     5,     6,
-      17,    18,    19,    20,    23,    24,    25,    26,    36,    27,
-      17,    18,    19,    20,    33,    23,    24,    25,    26,    33,
-      28,    23,    24,    25,    26,    28,    28,    27,    33,    33,
-      28,    28,    33,    28,    33,    15,    32,    79,    -1,    -1,
-      -1,    91
+      40,    90,     3,    72,    19,    37,     7,    37,    35,    36,
+      11,    12,    44,     3,    44,    33,    34,    35,    36,     0,
+      39,    61,    62,    63,    93,    26,    21,     3,     6,   118,
+      31,    32,    37,     3,    74,    75,    76,    77,    78,    79,
+      80,    81,    82,    83,   133,    37,     3,     3,   117,    89,
+       7,    91,    38,    46,    11,    12,     3,     4,     5,     6,
+      22,     8,     9,    42,    39,     3,    37,    41,    37,    26,
+       6,    37,    37,     3,    31,    32,    23,    24,    25,    15,
+      27,    28,    29,    30,    43,    38,    43,    23,     3,     3,
+       4,     5,     6,    40,     8,     9,    32,     3,     4,     5,
+       6,    26,     8,     9,    45,    39,    46,    38,    37,    23,
+      24,    25,     3,    27,    28,    29,    30,    23,    24,    25,
+      46,    27,    28,    29,    30,    43,    40,     3,     4,     5,
+       6,    38,     8,     9,    40,    37,    39,    38,    43,    43,
+      38,    10,     4,     5,     6,    39,    43,    23,    24,    25,
+      43,    27,    28,    29,    30,    38,    15,   109,    20,     4,
+       5,     6,    32,    -1,    40,    27,    28,    29,    30,    13,
+      14,    15,    16,    17,    18,    20,    -1,    -1,    40,     4,
+       5,     6,    27,    28,    29,    30,    -1,    -1,    -1,    33,
+      34,    35,    36,    13,    14,    15,    16,    17,    18,    43,
+      -1,    -1,    27,    28,    29,    30,    13,    14,    15,    16,
+      17,    18,    -1,    33,    34,    35,    36,    -1,    38,    13,
+      14,    15,    16,    17,    18,    -1,    33,    34,    35,    36,
+      -1,    38,    13,    14,    15,    16,    17,    18,    -1,    33,
+      34,    35,    36,    -1,    38,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    33,    34,    35,    36
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     9,    38,    42,     3,     0,    29,     4,     5,     6,
-      10,    17,    18,    19,    20,    39,    40,    41,    11,    30,
-      41,     3,     6,    27,     3,    40,    49,    50,    51,    27,
-       3,    28,    36,    12,    29,    51,    31,    43,    32,     3,
-       8,    13,    14,    15,    30,    40,    44,    45,     3,    27,
-      34,     3,     7,    16,    21,    22,    33,    46,    27,    27,
-      27,     3,    33,    28,    46,    47,    48,     3,    27,    34,
-      23,    24,    25,    26,    33,    46,    46,    16,    35,    29,
-      36,    28,    27,    48,     3,    46,    46,    46,    46,    28,
-      28,    36,    52,    46,    43,    46,    33,    48,    28,    27,
-      33,    33,    47,    28,    30,    28,    48,    33,    33,    28
+       0,    19,    48,    52,     3,     0,    39,     4,     5,     6,
+      20,    27,    28,    29,    30,    49,    50,    51,    21,    40,
+      51,     3,     6,    37,     3,    50,    60,    61,    62,    37,
+       3,    38,    46,    22,    39,    62,    41,    53,    42,     3,
+       8,     9,    23,    24,    25,    40,    50,    54,    56,     3,
+      37,    44,     3,     7,    11,    12,    26,    31,    32,    43,
+      57,    37,    37,    37,    37,     3,    43,    38,    57,    58,
+      59,     3,    37,    44,    13,    14,    15,    16,    17,    18,
+      33,    34,    35,    36,    43,    57,    57,    57,    26,    45,
+      39,    46,    38,    37,    59,     3,    57,    57,    57,    57,
+      57,    57,    57,    57,    57,    57,    38,    38,    38,    46,
+      63,    57,    53,    57,    43,    59,    38,    37,    39,    43,
+      43,    58,    38,    40,    38,    59,    53,    43,    43,    38,
+      40,    10,    55,    39,    53,    40
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    37,    38,    39,    39,    40,    40,    40,    40,    40,
-      40,    40,    41,    41,    42,    43,    43,    44,    44,    44,
-      44,    44,    44,    44,    44,    45,    46,    46,    46,    46,
-      46,    46,    46,    46,    46,    46,    46,    47,    47,    48,
-      48,    49,    49,    50,    50,    51,    52,    52
+       0,    47,    48,    49,    49,    50,    50,    50,    50,    50,
+      50,    50,    51,    51,    52,    53,    53,    54,    54,    54,
+      54,    54,    54,    54,    54,    54,    55,    55,    56,    57,
+      57,    57,    57,    57,    57,    57,    57,    57,    57,    57,
+      57,    57,    57,    57,    57,    57,    57,    57,    58,    58,
+      59,    59,    60,    60,    61,    61,    62,    63,    63
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -720,9 +765,10 @@ static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     1,     2,     1,     1,     1,     1,     1,
        1,     1,     8,    13,     5,     0,     2,     2,     3,     2,
-       5,     5,     6,     5,     7,     4,     1,     1,     1,     1,
-       1,     4,     6,     3,     3,     3,     3,     1,     3,     0,
-       1,     0,     1,     1,     3,     2,     0,     2
+       5,     5,     6,     5,     7,     8,     0,     4,     4,     1,
+       1,     1,     1,     1,     1,     1,     4,     6,     3,     3,
+       3,     3,     3,     3,     3,     3,     3,     3,     1,     3,
+       0,     1,     0,     1,     1,     3,     2,     0,     2
 };
 
 
@@ -1407,49 +1453,49 @@ yyreduce:
   switch (yyn)
     {
   case 5: /* type_specifier: TYPE_INT  */
-#line 65 "grammar/parser.y"
+#line 68 "grammar/parser.y"
               { (yyval.sval) = (yyvsp[0].sval); }
-#line 1413 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1459 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 6: /* type_specifier: TYPE_BOOL  */
-#line 66 "grammar/parser.y"
+#line 69 "grammar/parser.y"
                 { (yyval.sval) = (yyvsp[0].sval); }
-#line 1419 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1465 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 7: /* type_specifier: TYPE_VOID  */
-#line 67 "grammar/parser.y"
+#line 70 "grammar/parser.y"
                 { (yyval.sval) = (yyvsp[0].sval); }
-#line 1425 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1471 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 8: /* type_specifier: TYPE_DOUBLE  */
-#line 68 "grammar/parser.y"
+#line 71 "grammar/parser.y"
                   { (yyval.sval) = (yyvsp[0].sval); }
-#line 1431 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1477 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 9: /* type_specifier: TYPE_FLOAT  */
-#line 69 "grammar/parser.y"
+#line 72 "grammar/parser.y"
                   { (yyval.sval) = (yyvsp[0].sval); }
-#line 1437 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1483 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 10: /* type_specifier: TYPE_CHAR  */
-#line 70 "grammar/parser.y"
+#line 73 "grammar/parser.y"
                   { (yyval.sval) = (yyvsp[0].sval); }
-#line 1443 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1489 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 11: /* type_specifier: TYPE_LONG  */
-#line 71 "grammar/parser.y"
+#line 74 "grammar/parser.y"
                   { (yyval.sval) = (yyvsp[0].sval); }
-#line 1449 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1495 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 12: /* function_decl: type_specifier IDENTIFIER '(' param_list_opt ')' '{' stmt_list '}'  */
-#line 75 "grammar/parser.y"
+#line 78 "grammar/parser.y"
                                                                        {
         auto func = std::make_shared<FunctionDeclNode>((yyvsp[-7].sval), (yyvsp[-6].sval), *(yyvsp[-4].param_list)); // <-- Passando *$4
         func->body = *(yyvsp[-1].stmt_list);
@@ -1457,11 +1503,11 @@ yyreduce:
         delete (yyvsp[-1].stmt_list);
         programFunctions.push_back(func);
     }
-#line 1461 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1507 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 13: /* function_decl: PUBLIC STATIC TYPE_VOID IDENTIFIER '(' TYPE_STRING '[' ']' IDENTIFIER ')' '{' stmt_list '}'  */
-#line 82 "grammar/parser.y"
+#line 85 "grammar/parser.y"
                                                                                                   {
         /* Mantemos o main fixo para facilitar */
         auto func = std::make_shared<FunctionDeclNode>((yyvsp[-10].sval), (yyvsp[-9].sval));
@@ -1469,67 +1515,67 @@ yyreduce:
         delete (yyvsp[-1].stmt_list);
         programFunctions.push_back(func);
     }
-#line 1473 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1519 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 14: /* class_decl: CLASS IDENTIFIER '{' function_list '}'  */
-#line 91 "grammar/parser.y"
+#line 94 "grammar/parser.y"
                                            {
         auto classNode = std::make_shared<ClassDeclNode>((yyvsp[-3].sval));
         classNode->functions = programFunctions;
         programFunctions.clear();
         rootNode = classNode;
     }
-#line 1484 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1530 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 15: /* stmt_list: %empty  */
-#line 100 "grammar/parser.y"
+#line 103 "grammar/parser.y"
                 { (yyval.stmt_list) = new std::vector<std::shared_ptr<StmtNode>>(); }
-#line 1490 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1536 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 16: /* stmt_list: stmt_list stmt  */
-#line 101 "grammar/parser.y"
+#line 104 "grammar/parser.y"
                      {
         (yyvsp[-1].stmt_list)->push_back(std::shared_ptr<StmtNode>((yyvsp[0].stmt)));
         (yyval.stmt_list) = (yyvsp[-1].stmt_list);
     }
-#line 1499 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1545 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 17: /* stmt: var_decl ';'  */
-#line 108 "grammar/parser.y"
+#line 111 "grammar/parser.y"
                  { (yyval.stmt) = (yyvsp[-1].stmt); }
-#line 1505 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1551 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 18: /* stmt: RETURN expr ';'  */
-#line 109 "grammar/parser.y"
+#line 112 "grammar/parser.y"
                       { (yyval.stmt) = new ReturnStmtNode(std::shared_ptr<ExprNode>((yyvsp[-1].expr))); }
-#line 1511 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1557 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 19: /* stmt: RETURN ';'  */
-#line 110 "grammar/parser.y"
+#line 113 "grammar/parser.y"
                  { (yyval.stmt) = new ReturnStmtNode(nullptr); }
-#line 1517 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1563 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 20: /* stmt: PRINT '(' expr ')' ';'  */
-#line 111 "grammar/parser.y"
+#line 114 "grammar/parser.y"
                              { (yyval.stmt) = new PrintStmtNode(std::shared_ptr<ExprNode>((yyvsp[-2].expr)), false); }
-#line 1523 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1569 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 21: /* stmt: PRINTLN '(' expr ')' ';'  */
-#line 112 "grammar/parser.y"
+#line 115 "grammar/parser.y"
                                { (yyval.stmt) = new PrintStmtNode(std::shared_ptr<ExprNode>((yyvsp[-2].expr)), true); }
-#line 1529 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1575 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 22: /* stmt: PRINTF '(' STRING_LITERAL printf_args_opt ')' ';'  */
-#line 113 "grammar/parser.y"
+#line 116 "grammar/parser.y"
                                                          { 
         std::vector<std::shared_ptr<ExprNode>> args;
         
@@ -1547,195 +1593,270 @@ yyreduce:
         // 4. Limpamos a lista temporária da memória
         delete (yyvsp[-2].expr_list);
     }
-#line 1551 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1597 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 23: /* stmt: IDENTIFIER '(' expr_list_opt ')' ';'  */
-#line 130 "grammar/parser.y"
+#line 133 "grammar/parser.y"
                                            {
         (yyval.stmt) = new MethodCallStmtNode((yyvsp[-4].sval), *(yyvsp[-2].expr_list));
         delete (yyvsp[-2].expr_list);
     }
-#line 1560 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1606 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
   case 24: /* stmt: IDENTIFIER '.' IDENTIFIER '(' expr_list_opt ')' ';'  */
-#line 134 "grammar/parser.y"
+#line 137 "grammar/parser.y"
                                                           { 
         std::string qualifiedName = std::string((yyvsp[-6].sval)) + "." + std::string((yyvsp[-4].sval));
         (yyval.stmt) = new MethodCallStmtNode(qualifiedName, *(yyvsp[-2].expr_list));
         delete (yyvsp[-2].expr_list);
     }
-#line 1570 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1616 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 25: /* var_decl: type_specifier IDENTIFIER '=' expr  */
+  case 25: /* stmt: IF '(' expr ')' '{' stmt_list '}' else_opt  */
 #line 142 "grammar/parser.y"
+                                                 {
+        std::vector<std::shared_ptr<StmtNode>> elseBody;
+        bool hasElse = (yyvsp[0].stmt_list) != nullptr;
+        if (hasElse) {
+            elseBody = *(yyvsp[0].stmt_list);
+            delete (yyvsp[0].stmt_list);
+        }
+        (yyval.stmt) = new IfStmtNode(std::shared_ptr<ExprNode>((yyvsp[-5].expr)), *(yyvsp[-2].stmt_list), elseBody, hasElse);
+        delete (yyvsp[-2].stmt_list);
+    }
+#line 1631 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+    break;
+
+  case 26: /* else_opt: %empty  */
+#line 155 "grammar/parser.y"
+                { (yyval.stmt_list) = nullptr; }
+#line 1637 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+    break;
+
+  case 27: /* else_opt: ELSE '{' stmt_list '}'  */
+#line 156 "grammar/parser.y"
+                             { (yyval.stmt_list) = (yyvsp[-1].stmt_list); }
+#line 1643 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+    break;
+
+  case 28: /* var_decl: type_specifier IDENTIFIER '=' expr  */
+#line 160 "grammar/parser.y"
                                        {
         (yyval.stmt) = new VarDeclNode((yyvsp[-3].sval), (yyvsp[-2].sval), std::shared_ptr<ExprNode>((yyvsp[0].expr)));
     }
-#line 1578 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1651 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 26: /* expr: INT_LITERAL  */
-#line 150 "grammar/parser.y"
+  case 29: /* expr: INT_LITERAL  */
+#line 168 "grammar/parser.y"
                   { (yyval.expr) = new LiteralNode((yyvsp[0].sval)); }
-#line 1584 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1657 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 27: /* expr: FLOAT_LITERAL  */
-#line 151 "grammar/parser.y"
+  case 30: /* expr: FLOAT_LITERAL  */
+#line 169 "grammar/parser.y"
                       { (yyval.expr) = new LiteralNode((yyvsp[0].sval)); }
-#line 1590 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1663 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 28: /* expr: CHAR_LITERAL  */
-#line 152 "grammar/parser.y"
+  case 31: /* expr: CHAR_LITERAL  */
+#line 170 "grammar/parser.y"
                       { (yyval.expr) = new LiteralNode((yyvsp[0].sval)); }
-#line 1596 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1669 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 29: /* expr: STRING_LITERAL  */
-#line 153 "grammar/parser.y"
+  case 32: /* expr: STRING_LITERAL  */
+#line 171 "grammar/parser.y"
                      { (yyval.expr) = new StringNode((yyvsp[0].sval)); }
-#line 1602 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1675 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 30: /* expr: IDENTIFIER  */
-#line 154 "grammar/parser.y"
+  case 33: /* expr: TRUE  */
+#line 172 "grammar/parser.y"
+           { (yyval.expr) = new LiteralNode("true"); }
+#line 1681 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+    break;
+
+  case 34: /* expr: FALSE  */
+#line 173 "grammar/parser.y"
+            { (yyval.expr) = new LiteralNode("false"); }
+#line 1687 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+    break;
+
+  case 35: /* expr: IDENTIFIER  */
+#line 174 "grammar/parser.y"
                  { 
         (yyval.expr) = new LiteralNode((yyvsp[0].sval)); // (Reutilizando o LiteralNode para facilitar)
     }
-#line 1610 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1695 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 31: /* expr: IDENTIFIER '(' expr_list_opt ')'  */
-#line 157 "grammar/parser.y"
+  case 36: /* expr: IDENTIFIER '(' expr_list_opt ')'  */
+#line 177 "grammar/parser.y"
                                        {
         (yyval.expr) = new MethodCallExprNode((yyvsp[-3].sval), *(yyvsp[-1].expr_list));
         delete (yyvsp[-1].expr_list);
     }
-#line 1619 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1704 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 32: /* expr: IDENTIFIER '.' IDENTIFIER '(' expr_list_opt ')'  */
-#line 161 "grammar/parser.y"
+  case 37: /* expr: IDENTIFIER '.' IDENTIFIER '(' expr_list_opt ')'  */
+#line 181 "grammar/parser.y"
                                                       {
         std::string qualifiedName = std::string((yyvsp[-5].sval)) + "." + std::string((yyvsp[-3].sval));
         (yyval.expr) = new MethodCallExprNode(qualifiedName, *(yyvsp[-1].expr_list));
         delete (yyvsp[-1].expr_list);
     }
-#line 1629 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1714 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 33: /* expr: expr '+' expr  */
-#line 166 "grammar/parser.y"
+  case 38: /* expr: expr '+' expr  */
+#line 186 "grammar/parser.y"
                     { (yyval.expr) = new BinaryExprNode("+", std::shared_ptr<ExprNode>((yyvsp[-2].expr)), std::shared_ptr<ExprNode>((yyvsp[0].expr))); }
-#line 1635 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1720 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 34: /* expr: expr '-' expr  */
-#line 167 "grammar/parser.y"
+  case 39: /* expr: expr '-' expr  */
+#line 187 "grammar/parser.y"
                     { (yyval.expr) = new BinaryExprNode("-", std::shared_ptr<ExprNode>((yyvsp[-2].expr)), std::shared_ptr<ExprNode>((yyvsp[0].expr))); }
-#line 1641 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1726 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 35: /* expr: expr '*' expr  */
-#line 168 "grammar/parser.y"
+  case 40: /* expr: expr '*' expr  */
+#line 188 "grammar/parser.y"
                     { (yyval.expr) = new BinaryExprNode("*", std::shared_ptr<ExprNode>((yyvsp[-2].expr)), std::shared_ptr<ExprNode>((yyvsp[0].expr))); }
-#line 1647 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1732 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 36: /* expr: expr '/' expr  */
-#line 169 "grammar/parser.y"
+  case 41: /* expr: expr '/' expr  */
+#line 189 "grammar/parser.y"
                     { (yyval.expr) = new BinaryExprNode("/", std::shared_ptr<ExprNode>((yyvsp[-2].expr)), std::shared_ptr<ExprNode>((yyvsp[0].expr))); }
-#line 1653 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1738 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 37: /* expr_list: expr  */
-#line 173 "grammar/parser.y"
+  case 42: /* expr: expr EQ expr  */
+#line 190 "grammar/parser.y"
+                   { (yyval.expr) = new BinaryExprNode("==", std::shared_ptr<ExprNode>((yyvsp[-2].expr)), std::shared_ptr<ExprNode>((yyvsp[0].expr))); }
+#line 1744 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+    break;
+
+  case 43: /* expr: expr NE expr  */
+#line 191 "grammar/parser.y"
+                   { (yyval.expr) = new BinaryExprNode("!=", std::shared_ptr<ExprNode>((yyvsp[-2].expr)), std::shared_ptr<ExprNode>((yyvsp[0].expr))); }
+#line 1750 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+    break;
+
+  case 44: /* expr: expr LT expr  */
+#line 192 "grammar/parser.y"
+                   { (yyval.expr) = new BinaryExprNode("<", std::shared_ptr<ExprNode>((yyvsp[-2].expr)), std::shared_ptr<ExprNode>((yyvsp[0].expr))); }
+#line 1756 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+    break;
+
+  case 45: /* expr: expr LE expr  */
+#line 193 "grammar/parser.y"
+                   { (yyval.expr) = new BinaryExprNode("<=", std::shared_ptr<ExprNode>((yyvsp[-2].expr)), std::shared_ptr<ExprNode>((yyvsp[0].expr))); }
+#line 1762 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+    break;
+
+  case 46: /* expr: expr GT expr  */
+#line 194 "grammar/parser.y"
+                   { (yyval.expr) = new BinaryExprNode(">", std::shared_ptr<ExprNode>((yyvsp[-2].expr)), std::shared_ptr<ExprNode>((yyvsp[0].expr))); }
+#line 1768 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+    break;
+
+  case 47: /* expr: expr GE expr  */
+#line 195 "grammar/parser.y"
+                   { (yyval.expr) = new BinaryExprNode(">=", std::shared_ptr<ExprNode>((yyvsp[-2].expr)), std::shared_ptr<ExprNode>((yyvsp[0].expr))); }
+#line 1774 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+    break;
+
+  case 48: /* expr_list: expr  */
+#line 199 "grammar/parser.y"
          { 
         (yyval.expr_list) = new std::vector<std::shared_ptr<ExprNode>>(); 
         (yyval.expr_list)->push_back(std::shared_ptr<ExprNode>((yyvsp[0].expr))); 
     }
-#line 1662 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1783 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 38: /* expr_list: expr_list ',' expr  */
-#line 177 "grammar/parser.y"
+  case 49: /* expr_list: expr_list ',' expr  */
+#line 203 "grammar/parser.y"
                          {
         (yyvsp[-2].expr_list)->push_back(std::shared_ptr<ExprNode>((yyvsp[0].expr)));
         (yyval.expr_list) = (yyvsp[-2].expr_list);
     }
-#line 1671 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1792 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 39: /* expr_list_opt: %empty  */
-#line 184 "grammar/parser.y"
+  case 50: /* expr_list_opt: %empty  */
+#line 210 "grammar/parser.y"
                 { (yyval.expr_list) = new std::vector<std::shared_ptr<ExprNode>>(); }
-#line 1677 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1798 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 40: /* expr_list_opt: expr_list  */
-#line 185 "grammar/parser.y"
+  case 51: /* expr_list_opt: expr_list  */
+#line 211 "grammar/parser.y"
                 { (yyval.expr_list) = (yyvsp[0].expr_list); }
-#line 1683 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1804 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 41: /* param_list_opt: %empty  */
-#line 189 "grammar/parser.y"
+  case 52: /* param_list_opt: %empty  */
+#line 215 "grammar/parser.y"
                 { (yyval.param_list) = new std::vector<Param>(); }
-#line 1689 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1810 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 42: /* param_list_opt: param_list  */
-#line 190 "grammar/parser.y"
+  case 53: /* param_list_opt: param_list  */
+#line 216 "grammar/parser.y"
                  { (yyval.param_list) = (yyvsp[0].param_list); }
-#line 1695 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1816 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 43: /* param_list: param  */
-#line 194 "grammar/parser.y"
+  case 54: /* param_list: param  */
+#line 220 "grammar/parser.y"
           { 
         (yyval.param_list) = new std::vector<Param>(); 
         (yyval.param_list)->push_back(*(yyvsp[0].param)); 
         delete (yyvsp[0].param);
     }
-#line 1705 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1826 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 44: /* param_list: param_list ',' param  */
-#line 199 "grammar/parser.y"
+  case 55: /* param_list: param_list ',' param  */
+#line 225 "grammar/parser.y"
                            {
         (yyvsp[-2].param_list)->push_back(*(yyvsp[0].param));
         (yyval.param_list) = (yyvsp[-2].param_list);
         delete (yyvsp[0].param);
     }
-#line 1715 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1836 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 45: /* param: type_specifier IDENTIFIER  */
-#line 207 "grammar/parser.y"
+  case 56: /* param: type_specifier IDENTIFIER  */
+#line 233 "grammar/parser.y"
                               { 
         (yyval.param) = new Param((yyvsp[-1].sval), (yyvsp[0].sval)); 
     }
-#line 1723 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1844 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 46: /* printf_args_opt: %empty  */
-#line 212 "grammar/parser.y"
+  case 57: /* printf_args_opt: %empty  */
+#line 238 "grammar/parser.y"
                 { (yyval.expr_list) = new std::vector<std::shared_ptr<ExprNode>>(); }
-#line 1729 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1850 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
-  case 47: /* printf_args_opt: ',' expr_list  */
-#line 213 "grammar/parser.y"
+  case 58: /* printf_args_opt: ',' expr_list  */
+#line 239 "grammar/parser.y"
                     { (yyval.expr_list) = (yyvsp[0].expr_list); }
-#line 1735 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1856 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
     break;
 
 
-#line 1739 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
+#line 1860 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.cpp"
 
       default: break;
     }
@@ -1959,7 +2080,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 216 "grammar/parser.y"
+#line 242 "grammar/parser.y"
 
 
 void yyerror(const char* s) {

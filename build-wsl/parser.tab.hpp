@@ -60,20 +60,30 @@ extern int yydebug;
     TYPE_VOID = 261,               /* TYPE_VOID  */
     INT_LITERAL = 262,             /* INT_LITERAL  */
     RETURN = 263,                  /* RETURN  */
-    CLASS = 264,                   /* CLASS  */
-    PUBLIC = 265,                  /* PUBLIC  */
-    STATIC = 266,                  /* STATIC  */
-    TYPE_STRING = 267,             /* TYPE_STRING  */
-    PRINT = 268,                   /* PRINT  */
-    PRINTLN = 269,                 /* PRINTLN  */
-    PRINTF = 270,                  /* PRINTF  */
-    STRING_LITERAL = 271,          /* STRING_LITERAL  */
-    TYPE_DOUBLE = 272,             /* TYPE_DOUBLE  */
-    TYPE_FLOAT = 273,              /* TYPE_FLOAT  */
-    TYPE_CHAR = 274,               /* TYPE_CHAR  */
-    TYPE_LONG = 275,               /* TYPE_LONG  */
-    FLOAT_LITERAL = 276,           /* FLOAT_LITERAL  */
-    CHAR_LITERAL = 277             /* CHAR_LITERAL  */
+    IF = 264,                      /* IF  */
+    ELSE = 265,                    /* ELSE  */
+    TRUE = 266,                    /* TRUE  */
+    FALSE = 267,                   /* FALSE  */
+    EQ = 268,                      /* EQ  */
+    NE = 269,                      /* NE  */
+    LT = 270,                      /* LT  */
+    LE = 271,                      /* LE  */
+    GT = 272,                      /* GT  */
+    GE = 273,                      /* GE  */
+    CLASS = 274,                   /* CLASS  */
+    PUBLIC = 275,                  /* PUBLIC  */
+    STATIC = 276,                  /* STATIC  */
+    TYPE_STRING = 277,             /* TYPE_STRING  */
+    PRINT = 278,                   /* PRINT  */
+    PRINTLN = 279,                 /* PRINTLN  */
+    PRINTF = 280,                  /* PRINTF  */
+    STRING_LITERAL = 281,          /* STRING_LITERAL  */
+    TYPE_DOUBLE = 282,             /* TYPE_DOUBLE  */
+    TYPE_FLOAT = 283,              /* TYPE_FLOAT  */
+    TYPE_CHAR = 284,               /* TYPE_CHAR  */
+    TYPE_LONG = 285,               /* TYPE_LONG  */
+    FLOAT_LITERAL = 286,           /* FLOAT_LITERAL  */
+    CHAR_LITERAL = 287             /* CHAR_LITERAL  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -93,7 +103,7 @@ union YYSTYPE
     std::vector<std::shared_ptr<StmtNode>>* stmt_list;
     std::vector<std::shared_ptr<ExprNode>>* expr_list;
 
-#line 97 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.hpp"
+#line 107 "/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/parser.tab.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

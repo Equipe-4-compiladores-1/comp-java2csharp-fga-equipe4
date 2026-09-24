@@ -16,6 +16,7 @@ class PrintfStmtNode;
 class StringNode;
 class MethodCallExprNode;
 class MethodCallStmtNode;
+class IfStmtNode;
 
 // Padrão Visitor para percorrer a AST
 class ASTVisitor {
@@ -32,6 +33,7 @@ public:
     virtual void visit(StringNode* node) = 0;
     virtual void visit(MethodCallExprNode* node) = 0;
     virtual void visit(MethodCallStmtNode* node) = 0;
+    virtual void visit(IfStmtNode* node) = 0;
 };
 
 // Classe Base
@@ -64,6 +66,27 @@ public:
 
 // --- COMANDOS (STATEMENTS) ---
 class StmtNode : public ASTNode {};
+
+class IfStmtNode : public StmtNode {
+public:
+    std::shared_ptr<ExprNode> condition;
+    std::vector<std::shared_ptr<StmtNode>> thenBody;
+    std::vector<std::shared_ptr<StmtNode>> elseBody;
+    bool hasElse;
+
+    IfStmtNode(std::shared_ptr<ExprNode> condition,
+               std::vector<std::shared_ptr<StmtNode>> thenBody,
+               std::vector<std::shared_ptr<StmtNode>> elseBody = {},
+               bool hasElse = false)
+        : condition(std::move(condition)),
+          thenBody(std::move(thenBody)),
+          elseBody(std::move(elseBody)),
+          hasElse(hasElse) {}
+
+    void accept(ASTVisitor* visitor) override {
+        visitor->visit(this);
+    }
+};
 
 class VarDeclNode : public StmtNode {
 public:

@@ -42,6 +42,10 @@ void SemanticAnalyzerVisitor::visit(VarDeclNode* node) {
 }
 
 void SemanticAnalyzerVisitor::visit(LiteralNode* node) {
+    if (node->value == "true" || node->value == "false") {
+        return;
+    }
+
     if (!node->value.empty() && isalpha(node->value[0])) {
         SymbolInfo info;
         if (!symTable.resolveSymbol(node->value, info)) {
@@ -71,3 +75,50 @@ void SemanticAnalyzerVisitor::visit(MethodCallStmtNode* node) {
     for (auto& arg : node->args) arg->accept(this);
 }
 void SemanticAnalyzerVisitor::visit(StringNode* node) {}
+
+std::string SemanticAnalyzerVisitor::inferExprType(ExprNode* node) {
+    if (auto literal = dynamic_cast<LiteralNode*>(node)) {
+        if (literal->value == "true" || literal->value == "false") return "boolean";
+
+        SymbolInfo info;
+        if (symTable.resolveSymbol(literal->value, info)) return info.type;
+        if (literal->value.find('.') != std::string::npos) return "double";
+        return "int";
+    }
+
+    if (dynamic_cast<StringNode*>(node)) return "String";
+
+    if (auto binary = dynamic_cast<BinaryExprNode*>(node)) {
+        if (binary->op == "==" || binary->op == "!=" || binary->op == "<" ||
+            binary->op == "<=" || binary->op == ">" || binary->op == ">=") {
+            return "boolean";
+        }
+        return inferExprType(binary->left.get());
+    }
+
+    return "unknown";
+}
+
+void SemanticAnalyzerVisitor::visit(IfStmtNode* node) {
+    if (node->condition) {
+        node->condition->accept(this);
+        if (inferExprType(node->condition.get()) != "boolean") {
+            std::cerr << "Erro Semântico: A condição do if deve ser do tipo boolean.\n";
+            hasErrors = true;
+        }
+    }
+
+    symTable.enterScope();
+    for (auto& stmt : node->thenBody) {
+        if (stmt) stmt->accept(this);
+    }
+    symTable.exitScope();
+
+    if (node->hasElse) {
+        symTable.enterScope();
+        for (auto& stmt : node->elseBody) {
+            if (stmt) stmt->accept(this);
+        }
+        symTable.exitScope();
+    }
+}
