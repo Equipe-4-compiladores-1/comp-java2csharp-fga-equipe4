@@ -25,24 +25,13 @@ std::shared_ptr<ClassDeclNode> rootNode;
     std::vector<std::shared_ptr<ExprNode>>* expr_list;
 }
 
-<<<<<<< HEAD
-%token <sval> IDENTIFIER TYPE_INT TYPE_BOOL TYPE_VOID INT_LITERAL
-%token RETURN
-%token IF ELSE TRUE FALSE
-%token EQ NE LT LE GT GE
-%token CLASS
-%token PUBLIC STATIC TYPE_STRING
-%token PRINT PRINTLN PRINTF
-%token <sval> STRING_LITERAL
-%token <sval> TYPE_DOUBLE TYPE_FLOAT TYPE_CHAR TYPE_LONG
-%token <sval> FLOAT_LITERAL CHAR_LITERAL
-=======
 %token <sval> IDENTIFIER INT_LITERAL FLOAT_LITERAL CHAR_LITERAL STRING_LITERAL
 %token TYPE_INT TYPE_DOUBLE TYPE_FLOAT TYPE_CHAR TYPE_LONG TYPE_BOOL TYPE_VOID
 %token RETURN CLASS PUBLIC STATIC TYPE_STRING PRINT PRINTLN PRINTF
+%token IF ELSE TRUE FALSE
+%token EQ NE LT LE GT GE
 
 %destructor { free($$); } <sval>
->>>>>>> origin/main
 
 %type <stmt> var_decl stmt
 %type <expr> expr
@@ -182,19 +171,12 @@ var_decl:
 
 
 expr:
-<<<<<<< HEAD
-      INT_LITERAL { $$ = new LiteralNode($1); }
-    | FLOAT_LITERAL   { $$ = new LiteralNode($1); } 
-    | CHAR_LITERAL    { $$ = new LiteralNode($1); }
-    | STRING_LITERAL { $$ = new StringNode($1); } 
-    | TRUE { $$ = new LiteralNode("true"); }
-    | FALSE { $$ = new LiteralNode("false"); }
-=======
       INT_LITERAL { $$ = new LiteralNode($1); free($1); }
     | FLOAT_LITERAL   { $$ = new LiteralNode($1); free($1); } 
     | CHAR_LITERAL    { $$ = new LiteralNode($1); free($1); }
-    | STRING_LITERAL { $$ = new StringNode($1); free($1); } 
->>>>>>> origin/main
+    | STRING_LITERAL { $$ = new StringNode($1); free($1); }
+    | TRUE { $$ = new LiteralNode("true"); }
+    | FALSE { $$ = new LiteralNode("false"); }
     | IDENTIFIER { 
         $$ = new LiteralNode($1);
         free($1);
@@ -268,7 +250,6 @@ printf_args_opt:
     /* vazio */ { $$ = new std::vector<std::shared_ptr<ExprNode>>(); }
     | ',' expr_list { $$ = $2; }
     ;
-
 %%
 
 void yyerror(const char* s) {
