@@ -16,7 +16,7 @@ void SemanticAnalyzerVisitor::visit(FunctionDeclNode* node) {
 
     for (const auto& param : node->params) {
         if (!symTable.defineSymbol(param.name, param.type)) {
-            std::cerr << "Erro Semântico: Parâmetro '" << param.name
+            std::cerr << "[Erro Semantico]: Parâmetro '" << param.name
                       << "' redefinido na função '" << node->name << "'.\n";
             hasErrors = true;
         }
@@ -35,7 +35,7 @@ void SemanticAnalyzerVisitor::visit(VarDeclNode* node) {
     }
     
     if (!symTable.defineSymbol(node->name, node->type)) {
-        std::cerr << "Erro Semântico: Variável '" << node->name 
+        std::cerr << "[Erro Semantico]: Variável '" << node->name 
                   << "' já foi declarada neste escopo.\n";
         hasErrors = true;
     }
@@ -49,7 +49,7 @@ void SemanticAnalyzerVisitor::visit(LiteralNode* node) {
     if (!node->value.empty() && isalpha(node->value[0])) {
         SymbolInfo info;
         if (!symTable.resolveSymbol(node->value, info)) {
-            std::cerr << "Erro Semântico: Uso de variável não declarada '" << node->value << "'.\n";
+            std::cerr << "[Erro Semantico]: Uso de variável não declarada '" << node->value << "'.\n";
             hasErrors = true;
         }
     }

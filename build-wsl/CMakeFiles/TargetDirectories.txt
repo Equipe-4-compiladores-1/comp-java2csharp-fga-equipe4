@@ -1,6 +1,0 @@
-/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/CMakeFiles/java2csharp.dir
-/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/CMakeFiles/coverage.dir
-/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/CMakeFiles/coverage_html.dir
-/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/CMakeFiles/test.dir
-/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/CMakeFiles/edit_cache.dir
-/mnt/c/Users/marco/Documents/UNB/comp-java2csharp-fga-equipe4/build-wsl/CMakeFiles/rebuild_cache.dir
