@@ -1,5 +1,6 @@
 # Diretório de build do CMake
 build/
+build-*/
 bin/
 
 # Arquivos gerados pelo Flex e Bison

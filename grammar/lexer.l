@@ -20,6 +20,10 @@
 "boolean"           { return TYPE_BOOL; }
 "void"              { return TYPE_VOID; }
 "return"            { return RETURN; }
+"if"                { return IF; }
+"else"              { return ELSE; }
+"true"              { return TRUE; }
+"false"             { return FALSE; }
 "public"            { return PUBLIC; }
 "static"            { return STATIC; }
 "String"            { return TYPE_STRING; }
@@ -39,6 +43,12 @@
 "*"                 { return '*'; }
 "/"                 { return '/'; }
 "="                 { return '='; }
+"=="                { return EQ; }
+"!="                { return NE; }
+"<="                { return LE; }
+">="                { return GE; }
+"<"                 { return LT; }
+">"                 { return GT; }
 ";"                 { return ';'; }
 "("                 { return '('; }
 ")"                 { return ')'; }

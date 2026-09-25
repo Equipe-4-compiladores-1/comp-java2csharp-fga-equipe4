@@ -1,4 +1,5 @@
 #include "codegen.h"
+#include <sstream>
 
 void CSharpCodegenVisitor::generateProgram(const std::shared_ptr<ClassDeclNode>& root) {
     if (!root) return;
@@ -176,4 +177,35 @@ void CSharpCodegenVisitor::visit(MethodCallStmtNode* node) {
     }
 
     std::cout << ");\n";
+}
+
+void CSharpCodegenVisitor::visit(IfStmtNode* node) {
+    std::cout << "            if (";
+    node->condition->accept(this);
+    std::cout << ") {\n";
+
+    auto generateBody = [this](const std::vector<std::shared_ptr<StmtNode>>& body) {
+        std::ostringstream bodyOutput;
+        std::streambuf* previousBuffer = std::cout.rdbuf(bodyOutput.rdbuf());
+        for (const auto& stmt : body) {
+            if (stmt) stmt->accept(this);
+        }
+        std::cout.rdbuf(previousBuffer);
+
+        std::istringstream lines(bodyOutput.str());
+        std::string line;
+        while (std::getline(lines, line)) {
+            std::cout << "    " << line << "\n";
+        }
+    };
+
+    generateBody(node->thenBody);
+
+    std::cout << "            }";
+    if (node->hasElse) {
+        std::cout << " else {\n";
+        generateBody(node->elseBody);
+        std::cout << "            }";
+    }
+    std::cout << "\n";
 }

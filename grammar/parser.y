@@ -28,18 +28,21 @@ std::shared_ptr<ClassDeclNode> rootNode;
 %token <sval> IDENTIFIER INT_LITERAL FLOAT_LITERAL CHAR_LITERAL STRING_LITERAL
 %token TYPE_INT TYPE_DOUBLE TYPE_FLOAT TYPE_CHAR TYPE_LONG TYPE_BOOL TYPE_VOID
 %token RETURN CLASS PUBLIC STATIC TYPE_STRING PRINT PRINTLN PRINTF
+%token IF ELSE TRUE FALSE
+%token EQ NE LT LE GT GE
 
 %destructor { free($$); } <sval>
 
 %type <stmt> var_decl stmt
 %type <expr> expr
 %type <stmt_list> stmt_list
+%type <stmt_list> else_opt
 %type <sval> type_specifier
 %type <expr_list> expr_list printf_args_opt expr_list_opt
 %type <param> param
 %type <param_list> param_list param_list_opt
 
-
+%left EQ NE LT LE GT GE
 %left '+' '-'
 %left '*' '/'
 
@@ -140,6 +143,21 @@ stmt:
         free($1);
         free($3);
     }
+    | IF '(' expr ')' '{' stmt_list '}' else_opt {
+        std::vector<std::shared_ptr<StmtNode>> elseBody;
+        bool hasElse = $8 != nullptr;
+        if (hasElse) {
+            elseBody = *$8;
+            delete $8;
+        }
+        $$ = new IfStmtNode(std::shared_ptr<ExprNode>($3), *$6, elseBody, hasElse);
+        delete $6;
+    }
+    ;
+
+else_opt:
+    /* vazio */ { $$ = nullptr; }
+    | ELSE '{' stmt_list '}' { $$ = $3; }
     ;
 
 var_decl:
@@ -156,7 +174,9 @@ expr:
       INT_LITERAL { $$ = new LiteralNode($1); free($1); }
     | FLOAT_LITERAL   { $$ = new LiteralNode($1); free($1); } 
     | CHAR_LITERAL    { $$ = new LiteralNode($1); free($1); }
-    | STRING_LITERAL { $$ = new StringNode($1); free($1); } 
+    | STRING_LITERAL { $$ = new StringNode($1); free($1); }
+    | TRUE { $$ = new LiteralNode("true"); }
+    | FALSE { $$ = new LiteralNode("false"); }
     | IDENTIFIER { 
         $$ = new LiteralNode($1);
         free($1);
@@ -177,6 +197,12 @@ expr:
     | expr '-' expr { $$ = new BinaryExprNode("-", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
     | expr '*' expr { $$ = new BinaryExprNode("*", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
     | expr '/' expr { $$ = new BinaryExprNode("/", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
+    | expr EQ expr { $$ = new BinaryExprNode("==", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
+    | expr NE expr { $$ = new BinaryExprNode("!=", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
+    | expr LT expr { $$ = new BinaryExprNode("<", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
+    | expr LE expr { $$ = new BinaryExprNode("<=", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
+    | expr GT expr { $$ = new BinaryExprNode(">", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
+    | expr GE expr { $$ = new BinaryExprNode(">=", std::shared_ptr<ExprNode>($1), std::shared_ptr<ExprNode>($3)); }
     ;
 
 expr_list:
@@ -224,7 +250,6 @@ printf_args_opt:
     /* vazio */ { $$ = new std::vector<std::shared_ptr<ExprNode>>(); }
     | ',' expr_list { $$ = $2; }
     ;
-
 %%
 
 void yyerror(const char* s) {
